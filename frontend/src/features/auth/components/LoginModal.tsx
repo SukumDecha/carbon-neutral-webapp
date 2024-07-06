@@ -1,3 +1,5 @@
+import { Button } from "antd";
+
 const LoginModal = () => {
   return (
     <>
@@ -5,12 +7,14 @@ const LoginModal = () => {
       <div className="-login-modal">
         <form className="flex flex-col">
           <label htmlFor="email">Username or Email</label>
-          <br />
           <input name="email" placeholder="Skibidi@gmail.com"></input>
-          <br />
+
           <label htmlFor="password">Password</label>
-          <br />
           <input name="password" placeholder="password"></input>
+
+          <Button type="primary" htmlType="submit">
+            Login
+          </Button>
         </form>
       </div>
     </>

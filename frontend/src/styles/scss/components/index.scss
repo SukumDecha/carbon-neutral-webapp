@@ -1,6 +1,11 @@
 // variables
 @import "../variables/breakpoint";
 @import "../variables/color";
+
+// layouts
+@import "./footer";
+@import "./header";
+
 // components
 @import "./home";
-@import "./auth"
+@import "./auth";

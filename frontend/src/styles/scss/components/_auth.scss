@@ -36,7 +36,6 @@ body {
 
     form {
         padding: 46px 37px;
-
     }
 
     input {
@@ -44,5 +43,17 @@ body {
         height: 54px;
         border-radius: 8px;
         background: #E5B261;
+        border-color: #E5B261;
+
+        &::placeholder {
+            padding: 4px;
+            opacity: 0.7;
+        }
+
+        &:focus {
+            border-color: #E5B261;
+        }
+
+        margin-bottom: 8px;
     }
 }

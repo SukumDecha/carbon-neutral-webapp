@@ -5,9 +5,20 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div>
+    <div
+      style={{
+        position: "relative",
+        border: "4px solid red",
+      }}
+    >
       <Header />
-      <Outlet />
+      <div
+        style={{
+          minHeight: "calc(100vh - 100px)",
+        }}
+      >
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );
