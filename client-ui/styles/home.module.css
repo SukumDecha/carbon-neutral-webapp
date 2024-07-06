@@ -1,0 +1,68 @@
+.intro{
+    width: 390px;
+    height: 153px;
+    flex-shrink: 0;
+    background: url(/assets/home/imagetree.png) lightgray 50% / cover no-repeat;
+    color: #FFF7F7;
+
+}
+.introtext{
+    padding-top: 10%;
+    text-align: center;
+font-family: Manrope;
+font-size: 20px;
+font-style: normal;
+font-weight: 1000;
+line-height: 30px; /* 187.5% */
+letter-spacing: -0.32px;
+
+}
+
+.pathTo{
+    color: var(--Nigger, #000);
+text-align: center;
+font-family: Manrope;
+font-size: 16px;
+font-style: normal;
+font-weight: 200;
+line-height: 30px; /* 187.5% */
+letter-spacing: -0.32px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+margin-top: 5%;
+}
+.donate{
+    color: var(--Nigger, #000);
+
+text-align: center;
+font-family: Manrope;
+font-size: 16px;
+font-style: normal;
+font-weight: 200;
+line-height: 30px; /* 187.5% */
+letter-spacing: -0.32px;
+margin-top: 5%;
+}
+.boxes{
+    border-radius: 17px;
+background: #FEF9F9;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+width: 367px;
+height: 148px;
+flex-shrink: 0;
+}
+.donateLogo{
+    color: var(--Nigger, #000);
+    text-align: center;
+    font-family: Manrope;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 30px; /* 187.5% */
+    letter-spacing: -0.32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 9%;
+}

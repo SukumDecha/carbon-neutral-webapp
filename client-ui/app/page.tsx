@@ -1,8 +1,8 @@
-import HomeScreen from "@/screens/HomeScreen";
+import HomePage from "@/components/home/page";
 import React from "react";
 
 const page = () => {
-  return <HomeScreen />;
+  return <HomePage />;
 };
 
 export default page;
