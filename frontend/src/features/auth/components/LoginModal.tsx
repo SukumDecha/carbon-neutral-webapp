@@ -1,10 +1,18 @@
 import Button from "../../../shared/components/Button";
+import { IState } from "../../../screens/AuthScreen";
 
-const LoginModal = () => {
+interface IProps {
+  setState: (state: IState) => void;
+}
+const LoginModal = ({ setState }: IProps) => {
+
+  const redirectToRegister = () => {
+    setState("register");
+  };
   return (
     <>
       <h1 className="-title">Login</h1>
-      <div className="-login-modal">
+      <div className="-auth-modal">
         <form>
           <label htmlFor="email">Username or Email</label>
           <input name="email" placeholder="Skibidi@gmail.com"></input>
@@ -14,6 +22,18 @@ const LoginModal = () => {
 
           <Button htmlType="submit">Login</Button>
         </form>
+
+        <div className="-footer">
+          <p>Don't have an account?</p>
+
+          <Button
+            htmlType="submit"
+            primary={false}
+            onClick={redirectToRegister}
+          >
+            Sign-Up
+          </Button>
+        </div>
       </div>
     </>
   );

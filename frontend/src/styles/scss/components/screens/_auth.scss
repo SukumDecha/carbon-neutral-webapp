@@ -13,7 +13,28 @@ body {
 
     background-color: #4A3B28;
     overflow: hidden;
+    z-index: 0;
 
+    .-login {
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+        object-fit: cover;
+        width: 100%;
+        height: 70%;
+
+        @media (min-width: $breakpoint-lg) {
+            height: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
     .-title {
         color: #FEEED5;
         text-align: center;
@@ -22,10 +43,11 @@ body {
         font-size: 32px;
         font-style: normal;
         font-weight: 500;
-        line-height: 56px;
+        line-height: 40px;
     }
 
-    .-login-modal {
+    .-auth-modal {
+        z-index: 20;
         width: 100%;
         height: 50%;
         
@@ -35,25 +57,46 @@ body {
     }
 
     form {
-        padding: 46px 37px;
+        display: flex;
+        flex-direction: column;
+        margin: 46px 37px 0 37px;
+
+        input {
+            height: 48px;
+            border-radius: 8px;
+            margin-top: 4px;
+            background: #E5B261;
+            border: none;
+            padding-left: 12px;
+    
+            &::placeholder {
+                opacity: 0.7;
+            }
+    
+            &:focus {
+                border-color: #E5B261;
+            }
+    
+            margin-bottom: 8px;
+        }
     }
 
-    input {
-        width: 100%;
-        height: 54px;
-        border-radius: 8px;
-        background: #E5B261;
-        border-color: #E5B261;
-
-        &::placeholder {
-            padding: 4px;
-            opacity: 0.7;
-        }
-
-        &:focus {
-            border-color: #E5B261;
-        }
-
-        margin-bottom: 8px;
+    button {
+        display: block;
+        margin: 12px auto;
     }
+
+    .-footer {
+        margin-bottom: 48px;
+        p {
+            color: #4A3B28;
+            text-align: center;
+            font-family: Manrope;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 28px;
+        }
+    }
+    
 }

@@ -8,7 +8,6 @@ const Layout = () => {
     <div
       style={{
         position: "relative",
-        border: "4px solid red",
       }}
     >
       <Header />
@@ -16,7 +15,8 @@ const Layout = () => {
         style={{
           minHeight: "calc(100vh)",
           margin: "0 auto",
-          marginBottom: "32px",
+          paddingBottom: "32px",
+          zIndex: 0,
         }}
       >
         <Outlet />
