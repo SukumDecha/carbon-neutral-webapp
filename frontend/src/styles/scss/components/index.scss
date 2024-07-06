@@ -3,9 +3,13 @@
 @import "../variables/color";
 
 // layouts
-@import "./footer";
-@import "./header";
+@import "./layouts/footer";
+@import "./layouts/header";
+
+// sceens
+@import "./screens/auth";
+@import "./screens/home";
 
 // components
-@import "./home";
-@import "./auth";
+@import "./button";
+

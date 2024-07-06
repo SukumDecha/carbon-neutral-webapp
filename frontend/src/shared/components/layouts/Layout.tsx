@@ -14,7 +14,9 @@ const Layout = () => {
       <Header />
       <div
         style={{
-          minHeight: "calc(100vh - 100px)",
+          minHeight: "calc(100vh)",
+          margin: "0 auto",
+          marginBottom: "32px",
         }}
       >
         <Outlet />
