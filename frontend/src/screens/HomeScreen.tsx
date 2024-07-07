@@ -1,7 +1,7 @@
 const linkTo = [
   {
     title: "Car",
-    path: "/car",
+    path: "/tracker",
     img: "/assets/home/car.png",
   },
   {
