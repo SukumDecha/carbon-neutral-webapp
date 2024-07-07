@@ -1,12 +1,11 @@
-import { useState } from "react";
 import LoginModal from "../features/auth/components/LoginModal";
 import RegisterModal from "../features/auth/components/RegisterModal";
 
-export type IState = "login" | "register";
+interface IProps {
+  state: "login" | "register";
+}
 
-const AuthScreen = () => {
-  const [state, setState] = useState<IState>("login");
-
+const AuthScreen = ({ state }: IProps) => {
   return (
     <div className={`authScreen`}>
       {state === "login" ? (
@@ -16,8 +15,7 @@ const AuthScreen = () => {
       ) : (
         <div className="-register"></div>
       )}
-      {state === "login" && <LoginModal setState={setState} />}
-      {state === "register" && <RegisterModal setState={setState} />}
+      {state === "login" ? <LoginModal /> : <RegisterModal />}
     </div>
   );
 };

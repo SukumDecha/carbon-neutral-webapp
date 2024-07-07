@@ -1,13 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../../shared/components/Button";
-import { IState } from "../../../screens/AuthScreen";
 
-interface IProps {
-  setState: (state: IState) => void;
-}
-const LoginModal = ({ setState }: IProps) => {
+const LoginModal = () => {
+  const navigate = useNavigate();
 
   const redirectToRegister = () => {
-    setState("register");
+    navigate("/auth/register");
   };
   return (
     <>

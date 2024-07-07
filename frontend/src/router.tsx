@@ -7,6 +7,7 @@ import HomeScreen from "./screens/HomeScreen";
 import Layout from "./shared/components/layouts/Layout";
 import AuthScreen from "./screens/AuthScreen";
 import "./styles/scss/components/index.scss";
+import AuthLayout from "./shared/components/layouts/AuthLayout";
 
 const router = createBrowserRouter([
   {
@@ -16,10 +17,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomeScreen />,
-      },
-      {
-        path: "/auth",
-        element: <AuthScreen />,
       },
       // {
       //   path: "/applied",
@@ -35,6 +32,20 @@ const router = createBrowserRouter([
       //   element: <JobDetails></JobDetails>,
       //   loader: () => fetch("../public/jobs.json"),
       // },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <AuthScreen state="login" />,
+      },
+      {
+        path: "register",
+        element: <AuthScreen state="register" />,
+      },
     ],
   },
 ]);
