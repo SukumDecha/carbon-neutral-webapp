@@ -1,0 +1,90 @@
+.TreeScreen {
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 200;
+    min-height: 100vh;
+    background: #F9EEDA;
+    .intro{
+        width: 100%;
+        height: 296px;
+        background-image:url(/public/Treeromyen.png) ;
+        background-repeat: no-repeat;
+        background-color: #5B4F39;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10%;
+        p:nth-child(1){
+            margin-top: 15%;
+            gap: 50%;
+        }
+        
+    }
+    p{
+        color: var(--White, #FFF);
+        text-shadow: 0px 4px 2px rgba(0, 0, 0, 0.25);
+        font-family: "Irish Grover";
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 400;
+        margin: 0;
+    
+    }
+    .blockInput{
+        border-radius: 17px;
+        background: #FEF9F9;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        width: 201px;
+        height: 224px;
+        margin-top: -35%;
+        z-index: 1;
+        
+
+    }
+    .main{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        overflow: hidden;
+       
+    }
+    .circle{
+        width: 500px;
+        border-radius: 47%;
+        height: 400px;
+        flex-shrink: 0;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        margin-top: -45%;
+        background-color: #F9EEDA;
+        z-index: 0;
+    }
+    .Leadertext{
+        margin-top: -43%;
+        z-index: 1;
+        color: #5c4f38;
+    }
+    .Top1{
+        margin-top: 13%;
+        z-index: 1;
+        border-radius: 17px;
+        background-image: url(public/LeaderTree.png);
+        background-repeat: no-repeat;
+        background-color: #5B4F39;
+        width: 294px;
+        height: 104px;
+
+    }
+    .UserProfile{
+        display: flex;
+        justify-content: center;
+        img{
+            margin-top: -9%;
+            width: 64px;
+            height: 64px;
+            
+        }
+        
+        
+        
+    }
+}    
