@@ -1,66 +1,62 @@
+import { CarFront } from "lucide-react";
+import { Store } from "lucide-react";
+import { CalendarCheck } from "lucide-react";
+import { Trees } from "lucide-react";
+import { Fish } from "lucide-react";
+import { Utensils } from "lucide-react";
+
 const linkTo = [
   {
     title: "Car",
     path: "/tracker",
-    img: "/assets/home/car.png",
+    img: <CarFront size={32} />,
   },
   {
     title: "Exchange",
     path: "/exchange",
-    img: "/assets/home/event_upcoming.png",
+    img: <Store size={32} />,
   },
   {
     title: "Event",
     path: "/event",
-    img: "/assets/home/shopping_bag.png",
+    img: <CalendarCheck size={32} />,
   },
-];
-
-const donateLink = [
   {
     title: "Tree",
     path: "/donation/tree",
-    img: "/assets/home/car.png",
+    img: <Trees size={32} />,
   },
   {
     title: "Coral",
     path: "/donation/coral",
-    img: "/assets/home/event_upcoming.png",
+    img: <Fish size={32} />,
   },
   {
-    title: "Transportation",
+    title: "Food",
     path: "/donation/transportation",
-    img: "/assets/home/shopping_bag.png",
+    img: <Utensils size={32} />,
   },
 ];
 
 const HomeScreen = () => {
   return (
-    <div>
-      <div className="intro">
-        <p className="introtext">
-          Calculate your emissions, reduce your carbon footprint and support
-          climate protection!
-        </p>
-      </div>
-      <div className="pathTo">
-        {linkTo.map((LINK, idx) => (
-          <a href={LINK.path} key={idx}>
-            <img src={LINK.img} alt={LINK.title} />
-            {LINK.title}
-          </a>
-        ))}
-      </div>
-      <p className="donate">Donation</p>
-      <div className="boxes">
-        <div className="donateLogo">
-          {donateLink.map((LINK, idx) => (
+    <div className="HomeScreen">
+      <div className="intro">Let’s save our planet Together</div>
+      <div className="main">
+        <div className="pathTo">
+          {linkTo.map((LINK, idx) => (
             <a href={LINK.path} key={idx}>
-              <img src={LINK.img} alt={LINK.title} />
-              {LINK.title}
+              <h1>{LINK.img}</h1>
+              <p>{LINK.title}</p>
             </a>
           ))}
         </div>
+        <div className="boxes">
+          <div className="animated-earth">
+            <img src="earth.jpg" alt="Earth" className="rotate" />
+          </div>
+        </div>
+        <div className="Featured"></div>
       </div>
     </div>
   );

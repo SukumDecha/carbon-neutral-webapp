@@ -2,15 +2,22 @@ import { useState } from "react";
 
 // Todo: Validate input when distance lower than 0;
 const TrackerScreen = () => {
+  const [error, setError] = useState(false);
   const [distance, setDistance] = useState(0.0);
   const [fuelType, setFuelType] = useState("gasoline");
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
+    if (value < 0) {
+      setError(true);
+      return;
+    }
+
+    setError(false);
     setDistance(value);
   };
 
-  const handleFuelTypeChange = (e: any) => {
+  const handleFuelTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFuelType(e.target.value);
   };
 
@@ -33,32 +40,46 @@ const TrackerScreen = () => {
 
   return (
     <div className="trackScreen">
-      <div className="Picture"></div>
+      <div className="-picture"></div>
       <h1>Carculator</h1>
       <form>
-        <h3>CO2 emissions calculator for your car</h3>
-        <div className="Fuel">
-          <label>Fuel Type </label>
+        <h3>CO2 emissions calculator for your car</h3>
+        <div className="-line">
+          <h2>Fuel Type </h2>
           <select name="gas" id="gas" onChange={handleFuelTypeChange}>
             <option value="gasoline">Bensin</option>
             <option value="diesel">Diesel</option>
             <option value="hybrid">Hybrid</option>
           </select>
         </div>
-        <p className="Per">{distanceEmissions()}Kilogram / Kilometer</p>
 
-        <p className="dis">Distance Travelled</p>
-        <div className="Uinput">
-          <input
-            onChange={handleChange}
-            type="number"
-            name="kilo"
-            id="calculate"
-          />
-          <p className="Kilometer">Kilometer</p>
+        <div className="-unit">
+          <h2>Unit:</h2>
         </div>
 
-        <p>CO2 emitted for {calcuateEmiss()} kilogram</p>
+        <div className="-line">
+          <p>{distanceEmissions()}</p>
+          <p>Kg / Km</p>
+        </div>
+
+        <div className="-line mt-2">
+          <h2 className="-distance">Distance Traveled</h2>
+          <div className="-input">
+            <input
+              onChange={handleChange}
+              type="number"
+              name="kilo"
+              id="calculate"
+              placeholder="Enter your distance"
+            />
+            <p className="Kilometer">Kilometer</p>
+          </div>
+          {error && <p className="-error">Distance must be greater than 0</p>}
+        </div>
+
+        <div className="-summary">
+          CO2 emitted for {calcuateEmiss()} kilogram
+        </div>
       </form>
     </div>
   );

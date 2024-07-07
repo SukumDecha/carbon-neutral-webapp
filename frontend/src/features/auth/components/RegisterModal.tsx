@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../../shared/components/Button";
+import { ArrowRight } from "lucide-react";
 
 const RegisterModal = () => {
   const navigate = useNavigate();
@@ -22,7 +23,12 @@ const RegisterModal = () => {
           <label htmlFor="password">Password</label>
           <input name="password" placeholder="password"></input>
 
-          <Button htmlType="submit">Register</Button>
+          <Button htmlType="submit">
+            Register
+            <div className="-icon">
+              <ArrowRight />
+            </div>
+          </Button>
         </form>
 
         <div className="-footer">
@@ -30,6 +36,9 @@ const RegisterModal = () => {
 
           <Button htmlType="submit" primary={false} onClick={redirectToLogin}>
             Sign-in
+            <div className="-icon">
+              <ArrowRight />
+            </div>
           </Button>
         </div>
       </div>

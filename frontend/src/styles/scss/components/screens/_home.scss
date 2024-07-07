@@ -1,68 +1,125 @@
-.intro {
-    width: 390px;
-    height: 153px;
+.HomeScreen{
+  min-height: 100vh;
+  background-color: antiquewhite;
+
+    color: var(--Nigger, #000);
+    text-align: center;
+    font-family: Manrope;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 30px; 
+    letter-spacing: -0.32px;
+    .main{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    
+    }
+  .intro {
+    width: 100%;
+    height: 206px;
     flex-shrink: 0;
-    background: url(/assets/home/imagetree.png) lightgray 50% / cover no-repeat;
+    background: url(/homepage.png) #5B4F39 50% / cover no-repeat;
     color: #fff7f7;
-  }
-  
-  .introtext {
-    padding-top: 10%;
     text-align: center;
     font-family: Manrope;
     font-size: 20px;
     font-style: normal;
     font-weight: 1000;
-    line-height: 30px; /* 187.5% */
+    line-height: 30px; 
     letter-spacing: -0.32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
+  
+  
   .pathTo {
-    color: var(--Nigger, #000);
-    text-align: center;
-    font-family: Manrope;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: 30px; /* 187.5% */
-    letter-spacing: -0.32px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     margin-top: 5%;
+    text-decoration: none;
+    width: 367px;
+    height: 203px;
+    border-radius: 17px;
+    background: #FEF9F9;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.25);
+    flex-wrap: wrap;
+    
+    h1{
+      font-weight: 900;
+      margin: 0;
+      
+    }
+    p{
+      margin: 0;
+      
+    }
+    a{
+      margin: 2%;
+      margin-left: 10%;
+      margin-right: 10%;
+      text-decoration: none;
+      color: #000;
+    }
+    
   }
-  .donate {
-    color: var(--Nigger, #000);
   
-    text-align: center;
-    font-family: Manrope;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: 30px; /* 187.5% */
-    letter-spacing: -0.32px;
-    margin-top: 5%;
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
+  
+  @keyframes move {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(270px);
+    }
+   
+  }
+  
+
+  .animated-earth {
+    width: 20px;
+    margin-left: 4%;
+    animation: move 5s infinite;
+    display: inline-block;
+  }
+  .rotate {
+    width: 60px;
+    animation: rotate 10s linear infinite;
+  }
+
   .boxes {
+    margin-top: 3%;
     border-radius: 17px;
     background: #fef9f9;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     width: 367px;
-    height: 148px;
+    height: 98px;
     flex-shrink: 0;
-  }
-  .donateLogo {
-    color: var(--Nigger, #000);
-    text-align: center;
-    font-family: Manrope;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: 30px; /* 187.5% */
-    letter-spacing: -0.32px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding-top: 9%;
+    
+  }
+
+  .Featured{
+    margin-top: 3%;
+    width: 367px;
+    height: 182.62px;
+    border-radius: 17px;
+    background: #FEF9F9;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.25);
   }
   
+
+}

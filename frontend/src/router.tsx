@@ -9,19 +9,17 @@ import AuthScreen from "./screens/AuthScreen";
 import "./styles/scss/components/index.scss";
 import AuthLayout from "./shared/components/layouts/AuthLayout";
 import TrackerScreen from "./screens/TrackerScreen";
-import TreeScreen from "./screens/TreeScreen";
-import SeaSrceen from "./screens/SeaSrceen";
-import FoodSrceen from "./screens/FoodSrceen";
 import StoreSreen from "./screens/StoreSreen";
 import ProductScreen from "./screens/ProductScreen";
+import CampaignScreen from "./screens/CampaignScreen";
 
 const mockupItem = {
   title: "King",
-    img: "/shirt2.png",
-    point: 100,
-    description: "skibidi dop dopdopo",
-    quantity: 20
-}
+  img: "/shirt2.png",
+  point: 100,
+  description: "skibidi dop dopdopo",
+  quantity: 20,
+};
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,27 +31,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/tracker",
-        element:<TrackerScreen />
+        element: <TrackerScreen />,
       },
       {
-        path: "/tree",
-        element:<TreeScreen/>
+        path: "/campaign",
+        element: <CampaignScreen />,
       },
       {
-        path:"/sea",
-        element:<SeaSrceen/>
+        path: "/store",
+        element: <StoreSreen />,
       },
-      {
-        path:"/food",
-        element:<FoodSrceen/>
-      },
-      {
-        path:"/store",
-        element:<StoreSreen />
-      },
-      {path:"/product/:id",
-        element:<ProductScreen product={mockupItem}/>
-      }
+      { path: "/product/:id", element: <ProductScreen product={mockupItem} /> },
       // {
       //   path: "/applied",
       //   element: <AppliedJobs />,

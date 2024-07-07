@@ -1,6 +1,6 @@
 // not responsive
 
-function TreeScreen() {
+function CampaignScreen() {
   return (
     <div className="TreeScreen">
       <div className="main">
@@ -21,4 +21,4 @@ function TreeScreen() {
   );
 }
 
-export default TreeScreen;
+export default CampaignScreen;
