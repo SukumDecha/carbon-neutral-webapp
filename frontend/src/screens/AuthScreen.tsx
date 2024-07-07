@@ -6,16 +6,23 @@ interface IProps {
 }
 
 const AuthScreen = ({ state }: IProps) => {
-  return (
-    <div className={`authScreen`}>
-      {state === "login" ? (
+  if (state === "login")
+    return (
+      <div className={`authScreen`}>
         <div className="-login">
           <img src="'./../../../../../public/login-bg.png" alt="login-bg" />
         </div>
-      ) : (
-        <div className="-register"></div>
-      )}
-      {state === "login" ? <LoginModal /> : <RegisterModal />}
+        <LoginModal />
+      </div>
+    );
+
+  return (
+    <div className={`authScreen`}>
+      <div className="-register">
+        <img src="'./../../../../../public/register-bg.png" alt="register-bg" />
+      </div>
+
+      <RegisterModal />
     </div>
   );
 };
