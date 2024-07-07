@@ -8,7 +8,8 @@ import {
   findProductById,
 } from "../services/product.service.mjs";
 import { handleErrors } from "../utils/helpers.mjs";
-import { isAuthenticated } from "./middlewares/middleware.mjs";
+import { handleGuard } from "./middlewares/jwt.middleware.mjs";
+
 const router = Router();
 
 // Get all products
@@ -34,7 +35,7 @@ router.get("/api/products/:id", async (req, res) => {
 });
 
 // Add Product
-router.post("/api/products", isAuthenticated, async (req, res) => {
+router.post("/api/products", handleGuard, async (req, res) => {
   try {
     await addProduct(req.body);
     res.status(200).json({ message: "Product created successfully" });
@@ -44,7 +45,7 @@ router.post("/api/products", isAuthenticated, async (req, res) => {
 });
 
 // Update Product
-router.patch("/api/products/:id", isAuthenticated, async (req, res) => {
+router.patch("/api/products/:id", handleGuard, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -56,7 +57,7 @@ router.patch("/api/products/:id", isAuthenticated, async (req, res) => {
 });
 
 // Remove Product
-router.delete("/api/products/:id", isAuthenticated, async (req, res) => {
+router.delete("/api/products/:id", handleGuard, async (req, res) => {
   const { id } = req.params;
 
   try {

@@ -6,7 +6,7 @@ import {
 } from "../services/campaign.service.mjs";
 import { handleErrors } from "../utils/helpers.mjs";
 import { Router } from "express";
-import { isAuthenticated } from "./middlewares/middleware.mjs";
+import { handleGuard } from "./middlewares/jwt.middleware.mjs";
 
 const router = Router();
 
@@ -50,7 +50,7 @@ router.patch("/api/campaigns/:id", async (req, res) => {
   }
 });
 
-router.post("/api/campaigns", isAuthenticated, async (req, res) => {
+router.post("/api/campaigns", handleGuard, async (req, res) => {
   try {
     await createCampaign(req.body);
     res.status(201).json({ message: "Campaign created successfully" });
@@ -59,7 +59,7 @@ router.post("/api/campaigns", isAuthenticated, async (req, res) => {
   }
 });
 
-router.delete("/api/campaigns/:id", isAuthenticated, async (req, res) => {
+router.delete("/api/campaigns/:id", handleGuard, async (req, res) => {
   const { campaignId } = req.params;
 
   try {

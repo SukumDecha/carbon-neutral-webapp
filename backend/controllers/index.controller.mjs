@@ -6,7 +6,7 @@ import campaignRouter from "./campaign.controller.mjs";
 import blogRouter from "./blog.controller.mjs";
 import productRouter from "./product.controller.mjs";
 import commentRouter from "./comment.controller.mjs";
-import { isAuthenticated } from "./middlewares/middleware.mjs";
+import { handleGuard } from "./middlewares/jwt.middleware.mjs";
 
 const router = Router();
 
@@ -16,6 +16,6 @@ router.use(campaignRouter);
 router.use(blogRouter);
 router.use(productRouter);
 
-router.use(isAuthenticated, commentRouter);
+router.use(handleGuard, commentRouter);
 
 export default router;
