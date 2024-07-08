@@ -7,7 +7,7 @@ export const findAllProducts = async () => {
   if (!res.ok) {
     throw new Error("Failed to fetch product list");
   }
-  
+
   return (await res.json()) as IProduct[];
 };
 
@@ -49,7 +49,7 @@ export const updateProduct = async (id: number, data: IUpdateProduct) => {
   if (data.quantity) formData.append("quantity", data.quantity.toString());
   if (data.image)
     formData.append("image", data.image.fileList[0].originFileObj);
-  
+
   const res = await fetch(`http://localhost:3000/api/products/${id}`, {
     method: "PATCH",
     body: formData,
@@ -66,4 +66,23 @@ export const deleteProduct = async (id: number) => {
   });
 
   return { success: res.ok };
+};
+
+export const claimProduct = async (id: number, quantity: number) => {
+  const res = await fetch(
+    `http://localhost:3000/api/sell/${id}?quantity=${quantity}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    }
+  );
+
+  if (!res.ok) {
+    const { error } = await res.json();
+    throw new Error(error);
+  }
 };

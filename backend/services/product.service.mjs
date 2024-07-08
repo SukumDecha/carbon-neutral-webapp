@@ -29,6 +29,7 @@ export const addProduct = async (product) => {
 };
 
 export const updateProduct = async (id, product) => {
+  console.log(product);
   const { name, description, imagePath, point_cost, quantity } = product;
 
   const fieldsToUpdate = {
@@ -44,13 +45,13 @@ export const updateProduct = async (id, product) => {
 
   if (imagePath) {
     const currentProduct = await findProductById(id);
-    
+
     try {
       removeDirFromFile(currentProduct.image_url);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-    
+
     fieldsToUpdate.image_url = await saveFile(imagePath);
   }
 

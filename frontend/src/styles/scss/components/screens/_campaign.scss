@@ -157,9 +157,7 @@
         }
         
     }
-    .-blocktree{
-        
-
+    .-amount {
         button {
             width: 120px;
             height: 20.147px;
@@ -184,15 +182,20 @@
     align-items: center;
 
     .ant-card-meta-title {
-        font-size: 20px;
-        padding: 8px;
+        
+        p {
+            font-size: 16px;
+            line-height: 4px;
+
+        }
     }
 
     .-title {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 8px;
+        justify-content: start;
+        gap: 4px;
+        padding: 0;
     }
     
     .-desc {

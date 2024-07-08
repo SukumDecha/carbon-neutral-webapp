@@ -23,6 +23,7 @@ const Layout = () => {
       <div
         style={{
           margin: "0 auto",
+          paddingBottom: "64px",
           zIndex: 0,
         }}
       >

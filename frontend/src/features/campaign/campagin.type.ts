@@ -21,9 +21,15 @@ export type IAddCampaign = Omit<
   };
 };
 
-export type IUpdateCampaign = Partial<ICampaign> & {
+export type IUpdateCampaign = Partial<IAddCampaign> & {
   id: number;
   image?: {
     fileList: { originFileObj: File }[];
   };
+};
+
+export type IDonor = {
+  name: string;
+  img: string;
+  amount: number;
 };

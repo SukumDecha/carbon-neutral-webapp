@@ -5,6 +5,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  claimProduct,
 } from "../api";
 import { IUpdateProduct } from "../product.type";
 
@@ -50,6 +51,19 @@ export const useDeleteProduct = () => {
     mutationFn: deleteProduct,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+};
+
+export const useClaimProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, quantity }: { id: number; quantity: number }) =>
+      claimProduct(id, quantity),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["products", "history"],
+      });
     },
   });
 };

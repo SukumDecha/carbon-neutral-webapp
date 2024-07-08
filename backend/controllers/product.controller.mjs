@@ -16,7 +16,7 @@ const router = Router();
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, 
+    fileSize: 5 * 1024 * 1024,
   },
 });
 
@@ -46,14 +46,14 @@ router.get("/api/products/:id", async (req, res) => {
 router.post(
   "/api/products",
   handleGuard,
-  upload.single("image"), // Ensure the form uses 'file' as the field name
+  upload.single("image"),
   async (req, res) => {
     const productData = {
       name: req.body.name,
       description: req.body.description,
       point_cost: req.body.point_cost,
       quantity: req.body.quantity,
-      imagePath: req.file, // Updated to match the field name used by Multer
+      imagePath: req.file,
     };
 
     try {
@@ -66,21 +66,26 @@ router.post(
 );
 
 // Update Product
-router.patch("/api/products/:id", handleGuard,  upload.single("image"), async (req, res) => {
+router.patch(
+  "/api/products/:id",
+  handleGuard,
+  upload.single("image"),
+  async (req, res) => {
+    const { id } = req.params;
 
-  const { id } = req.params;
+    const updatedProduct = {
+      ...req.body,
+      imagePath: req.file,
+    };
 
-  const updatedProduct = {
-    ...req.body, imagePath: req.file
+    try {
+      await updateProduct(id, updatedProduct);
+      res.status(200).json({ message: "Product updated successfully" });
+    } catch (error) {
+      handleErrors(res, error, "Failed to update product");
+    }
   }
-
-  try {
-    await updateProduct(id, updatedProduct);
-    res.status(200).json({ message: "Product updated successfully" });
-  } catch (error) {
-    handleErrors(res, error, "Failed to update product");
-  }
-});
+);
 
 // Remove Product
 router.delete("/api/products/:id", handleGuard, async (req, res) => {
@@ -95,10 +100,11 @@ router.delete("/api/products/:id", handleGuard, async (req, res) => {
 });
 
 // Sell Product
-router.put("/api/products/:id/sell", async (req, res) => {
+router.put("/api/sell/:id", handleGuard, async (req, res) => {
   const { id: productId } = req.params;
-  const { id: userId } = req.user;
-  const { quantity } = req.body;
+  const userId = req.user.id;
+  const { quantity } = req.query;
+
   try {
     await sellProduct(productId, quantity, userId);
     res.status(200).json({ message: "Product sold successfully" });

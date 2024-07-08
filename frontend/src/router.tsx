@@ -44,11 +44,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile/history",
-        element: <HistoryScreen/>
+        element: <HistoryScreen />,
       },
       {
         path: "/profile/statistic",
-        element: <StatisticScreen/>
+        element: <StatisticScreen />,
+      },
+      {
+        path: "/carts",
+        element: <CartScreen />,
       },
       {
         path: "/tracker",
@@ -59,11 +63,11 @@ const router = createBrowserRouter([
         element: <CampaignScreen />,
       },
       {
-        path: "/campaign/:id",
+        path: "/campaign/:name",
         element: <CampaignDetails />,
       },
       {
-        path: "/campaign/edit/:id",
+        path: "/campaign/edit/:name",
         element: <EditCampaignForm />,
       },
       {
@@ -105,7 +109,7 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: (
-          <EmptyBox>
+          <EmptyBox redirectBtn>
             <h1>This page doesn't exist</h1>
           </EmptyBox>
         ),

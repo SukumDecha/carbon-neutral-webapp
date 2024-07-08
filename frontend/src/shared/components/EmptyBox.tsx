@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 interface IProps {
   children?: ReactNode;
+  redirectBtn?: boolean;
 }
 
-const EmptyBox = ({ children }: IProps) => {
+const EmptyBox = ({ children, redirectBtn = false }: IProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -28,7 +29,7 @@ const EmptyBox = ({ children }: IProps) => {
     >
       <Empty />
       {children}
-      <Button onClick={handleClick}>Go back home</Button>
+      {redirectBtn && <Button onClick={handleClick}>Go back home</Button>}
     </div>
   );
 };

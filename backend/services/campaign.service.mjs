@@ -12,6 +12,12 @@ export const findCampaignById = async (id) => {
   return await executeQuery(query, params);
 };
 
+export const findCampaignByName = async (name) => {
+  const query = "SELECT * FROM campaigns WHERE title = ?";
+  const params = [name];
+  return await executeQuery(query, params);
+};
+
 export const createCampaign = async (campaign) => {
   const { title, description, startDate, endDate, donation_goal, image } =
     campaign;
@@ -86,7 +92,7 @@ export const getTotalDonations = async (id) => {
 
 export const getTopDonors = async (id, limit) => {
   const query =
-    "SELECT user_id, SUM(amount) AS total FROM donations WHERE campaign_id = ? GROUP BY user_id ORDER BY total DESC LIMIT ?";
+    "SELECT u.name, u.avatar SUM(amount) AS total FROM donations d JOIN user u ON u.id = d.user_id WHERE campaign_id = ? GROUP BY user_id ORDER BY total DESC LIMIT ?";
   const params = [id, limit];
   return await executeQuery(query, params, false);
 };

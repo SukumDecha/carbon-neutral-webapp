@@ -52,6 +52,5 @@ export const logout = async (req, res) => {
 };
 
 export const getMe = async (req, res) => {
-  console.log("User: " + req.user);
   return req.user ? res.json(req.user) : res.sendStatus(401);
 };

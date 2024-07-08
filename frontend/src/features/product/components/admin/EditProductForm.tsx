@@ -26,10 +26,7 @@ const EditProductForm = () => {
 
   const initialValues = product
     ? {
-        name: product.name,
-        description: product.description,
-        quantity: product.quantity,
-        point_cost: product.point_cost,
+        ...product,
         image: undefined,
       }
     : {
@@ -37,7 +34,7 @@ const EditProductForm = () => {
         description: "",
         quantity: 1,
         point_cost: 1,
-        image: undefined
+        image: undefined,
       };
 
   useEffect(() => {
@@ -51,14 +48,13 @@ const EditProductForm = () => {
   };
 
   const handleSubmit = async (data: IUpdateProduct) => {
-
     try {
       await mutateAsync(data);
       // window.location.reload();
 
       toast.success("Product updated successfully");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Failed to update product");
     }
   };
@@ -143,11 +139,7 @@ const EditProductForm = () => {
         >
           <InputNumber placeholder="Enter product point cost" />
         </Form.Item>
-        <Form.Item
-          label="Upload product's picture"
-          name="image"
-
-        >
+        <Form.Item label="Upload product's picture" name="image">
           <Upload
             listType="picture-card"
             maxCount={1}
