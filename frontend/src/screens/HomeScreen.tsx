@@ -4,6 +4,7 @@ import { CalendarCheck } from "lucide-react";
 import { Trees } from "lucide-react";
 import { Fish } from "lucide-react";
 import { Utensils } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const linkTo = [
   {
@@ -13,7 +14,7 @@ const linkTo = [
   },
   {
     title: "Exchange",
-    path: "/exchange",
+    path: "/store",
     img: <Store size={32} />,
   },
   {
@@ -23,17 +24,17 @@ const linkTo = [
   },
   {
     title: "Tree",
-    path: "/donation/tree",
+    path: "/campaign",
     img: <Trees size={32} />,
   },
   {
     title: "Coral",
-    path: "/donation/coral",
+    path: "/campaign/coral",
     img: <Fish size={32} />,
   },
   {
     title: "Food",
-    path: "/donation/transportation",
+    path: "/campaign/transportation",
     img: <Utensils size={32} />,
   },
 ];
@@ -56,7 +57,29 @@ const HomeScreen = () => {
             <img src="earth.jpg" alt="Earth" className="rotate" />
           </div>
         </div>
-        <div className="Featured"></div>
+        <div className="Featured">
+          <div className="-item">
+            <img src="shirt.png" alt="" />
+            <p>T-Shirt</p>
+            <p>100 Point</p>
+            {/* fix link to item name link */}
+            <Link to={`/product/T-Shirt`}>
+              <button>Buy</button>
+            </Link>
+          </div>
+          <div className="-item">
+          <img src="shirt.png" alt="" />
+            <p>T-Shirt</p>
+            <p>100 Point</p>
+            {/* fix link to item name link */}
+            <Link to={`/product/T-Shirt`}>
+              <button>Buy</button>
+            </Link>
+          </div>
+          <div className="-item">s</div>
+          <div className="-item">s</div>
+
+        </div>
       </div>
     </div>
   );

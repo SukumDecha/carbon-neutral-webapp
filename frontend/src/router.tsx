@@ -12,6 +12,7 @@ import TrackerScreen from "./screens/TrackerScreen";
 import StoreSreen from "./screens/StoreSreen";
 import ProductScreen from "./screens/ProductScreen";
 import CampaignScreen from "./screens/CampaignScreen";
+import { ProfileScreen } from "./screens/ProfileScreen";
 
 const mockupItem = {
   title: "King",
@@ -41,7 +42,12 @@ const router = createBrowserRouter([
         path: "/store",
         element: <StoreSreen />,
       },
-      { path: "/product/:id", element: <ProductScreen product={mockupItem} /> },
+      { path: "/product/:id",
+        element: <ProductScreen product={mockupItem} /> },
+      {
+        path: "/profile",
+        element: <ProfileScreen/>
+      }
       // {
       //   path: "/applied",
       //   element: <AppliedJobs />,
