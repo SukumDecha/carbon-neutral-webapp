@@ -13,7 +13,7 @@ import ProductScreen from "./screens/ProductScreen";
 import CampaignScreen from "./screens/CampaignScreen";
 import UserProfile from "./features/user/components/UserProfile";
 import ExchangeScreen from "./screens/ExchangeScreen";
-import CreateScreen from "./screens/admin/AdminScreen";
+import AdminScreen from "./screens/admin/AdminScreen";
 import ClientProviders from "./shared/components/providers/ClientProviders";
 import Loading from "./shared/components/Loading";
 import EmptyBox from "./shared/components/EmptyBox";
@@ -49,14 +49,18 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/api/products"),
       },
       {
-        path: "/admin/create/:id",
-        element: <CreateScreen />,
-      },
-      {
         path: "*",
-        element: <EmptyBox />,
+        element: (
+          <EmptyBox>
+            <h1>This page doesn't existed</h1>
+          </EmptyBox>
+        ),
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <AdminScreen />,
   },
   {
     path: "/auth",

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useProduct } from "../features/product/hooks/useProduct";
 import Loading from "../shared/components/Loading";
 import EmptyBox from "../shared/components/EmptyBox";
+import { getImagePath } from "../shared/utils/helper.utils";
 
 const linkTo = [
   {
@@ -51,42 +52,31 @@ const HomeScreen = () => {
 
   return (
     <div className="HomeScreen">
-      <div className="intro">Let’s save our planet Together</div>
-      <div className="main">
-        <div className="pathTo">
-          {linkTo.map((LINK, idx) => (
-            <a href={LINK.path} key={idx}>
-              <h1>{LINK.img}</h1>
-              <p>{LINK.title}</p>
-            </a>
-          ))}
+      <div className="-intro">Let’s save our planet Together</div>
+      <div className="-navigation">
+        {linkTo.map((LINK, idx) => (
+          <a href={LINK.path} key={idx}>
+            <h1>{LINK.img}</h1>
+            <p>{LINK.title}</p>
+          </a>
+        ))}
+      </div>
+      <div className="-boxes">
+        <div className="animated-earth">
+          <img src="earth.jpg" alt="Earth" className="rotate" />
         </div>
-        <div className="boxes">
-          <div className="animated-earth">
-            <img src="earth.jpg" alt="Earth" className="rotate" />
-          </div>
-        </div>
-        <div className="Featured">
-          <div className="-item">
-            <img src="shirt.png" alt="" />
-            <p>T-Shirt</p>
-            <p>100 Point</p>
-            {/* fix link to item name link */}
-            <Link to={`/product/T-Shirt`}>
+      </div>
+      <div className="-product-list">
+        {products.map((product) => (
+          <div className="-item" key={product.id}>
+            <img src={getImagePath(product.image_url)} alt={product.name} />
+            <p>{product.name}</p>
+            <p>{product.point_cost} Point</p>
+            <Link to={`/product/${product.name}`}>
               <button>Buy</button>
             </Link>
           </div>
-
-          <div className="-item">
-            <img src="shirt.png" alt="" />
-            <p>T-Shirt</p>
-            <p>100 Point</p>
-            {/* fix link to item name link */}
-            <Link to={`/product/T-Shirt`}>
-              <button>Buy</button>
-            </Link>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
