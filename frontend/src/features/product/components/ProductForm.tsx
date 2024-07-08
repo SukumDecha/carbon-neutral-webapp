@@ -47,7 +47,7 @@ const CreateProductForm = ({ kind }: IProps) => {
         point_cost: 1,
         image: "",
       };
-      
+
   useEffect(() => {
     if (product && !image) {
       setImage(getImagePath(product.image_url));
@@ -81,9 +81,9 @@ const CreateProductForm = ({ kind }: IProps) => {
     }
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div className="form" style={{ maxWidth: 820 }}>

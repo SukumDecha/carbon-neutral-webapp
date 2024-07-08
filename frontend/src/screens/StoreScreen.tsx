@@ -7,7 +7,7 @@ import Button from "../shared/components/Button";
 import EmptyBox from "../shared/components/EmptyBox";
 import Loading from "../shared/components/Loading";
 
-function ExchangeScreen() {
+function StoreScreen() {
   const [searchTerm, setSearchTerm] = useState("");
   const { data: products, isLoading } = useProduct();
 
@@ -54,4 +54,4 @@ function ExchangeScreen() {
   );
 }
 
-export default ExchangeScreen;
+export default StoreScreen;
