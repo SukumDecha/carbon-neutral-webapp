@@ -66,11 +66,16 @@ router.post(
 );
 
 // Update Product
-router.patch("/api/products/:id", handleGuard, async (req, res) => {
+router.patch("/api/products/:id", handleGuard,  upload.single("image"), async (req, res) => {
+
   const { id } = req.params;
 
+  const updatedProduct = {
+    ...req.body, imagePath: req.file
+  }
+
   try {
-    await updateProduct(id, req.body);
+    await updateProduct(id, updatedProduct);
     res.status(200).json({ message: "Product updated successfully" });
   } catch (error) {
     handleErrors(res, error, "Failed to update product");

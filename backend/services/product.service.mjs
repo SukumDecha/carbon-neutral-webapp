@@ -29,7 +29,7 @@ export const addProduct = async (product) => {
 };
 
 export const updateProduct = async (id, product) => {
-  const { name, description, image, point_cost, quantity } = product;
+  const { name, description, imagePath, point_cost, quantity } = product;
 
   const fieldsToUpdate = {
     ...(name && { name }),
@@ -42,11 +42,16 @@ export const updateProduct = async (id, product) => {
     throw new Error("No fields provided for update");
   }
 
-  if (image) {
+  if (imagePath) {
     const currentProduct = await findProductById(id);
-    removeDirFromFile(currentProduct.image_url);
-
-    fieldsToUpdate.image_url = await saveFile(image);
+    
+    try {
+      removeDirFromFile(currentProduct.image_url);
+    } catch (err) {
+      console.log(err)
+    }
+    
+    fieldsToUpdate.image_url = await saveFile(imagePath);
   }
 
   const setClause = Object.keys(fieldsToUpdate)

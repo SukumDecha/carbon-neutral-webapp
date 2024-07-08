@@ -40,7 +40,7 @@ export const createProduct = async (data: IAddProduct) => {
   return { success: res.ok };
 };
 
-export const updateProduct = async (data: IUpdateProduct) => {
+export const updateProduct = async (id: number, data: IUpdateProduct) => {
   const formData = new FormData();
   if (data.name) formData.append("name", data.name);
   if (data.description) formData.append("description", data.description);
@@ -49,8 +49,8 @@ export const updateProduct = async (data: IUpdateProduct) => {
   if (data.quantity) formData.append("quantity", data.quantity.toString());
   if (data.image)
     formData.append("image", data.image.fileList[0].originFileObj);
-
-  const res = await fetch(`http://localhost:3000/api/products/${data.id}`, {
+  
+  const res = await fetch(`http://localhost:3000/api/products/${id}`, {
     method: "PATCH",
     body: formData,
     credentials: "include",

@@ -6,6 +6,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "../api";
+import { IUpdateProduct } from "../product.type";
 
 export const useProduct = () => {
   return useQuery({
@@ -33,10 +34,10 @@ export const useCreateProduct = () => {
   });
 };
 
-export const useUpdateProduct = () => {
+export const useUpdateProduct = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: updateProduct,
+    mutationFn: (data: IUpdateProduct) => updateProduct(id, data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["products"] });
     },
