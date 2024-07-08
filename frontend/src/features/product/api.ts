@@ -1,12 +1,9 @@
 import { IAddProduct, IProduct, IUpdateProduct } from "./product.type";
 // Fetch all products
 export const findAllProducts = async () => {
-  const res = await fetch("http://localhost:3000/api/products",
-      {
-        credentials: "include"
-      }
-    );
-
+  const res = await fetch("http://localhost:3000/api/products", {
+    method: "GET",
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch product list");
   }

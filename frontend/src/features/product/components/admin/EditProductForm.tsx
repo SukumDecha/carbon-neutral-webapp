@@ -4,33 +4,24 @@ import { Form, Input, InputNumber, Upload } from "antd";
 import { useState, useEffect } from "react";
 import { UploadChangeParam } from "antd/es/upload";
 import { RcFile, UploadFile } from "antd/es/upload/interface";
-import {
-  useCreateProduct,
-  useUpdateProduct,
-  useProductById,
-} from "../hooks/useProduct";
-import { IAddProduct } from "../product.type";
+import { useUpdateProduct, useProductById } from "../../hooks/useProduct";
+import { IUpdateProduct } from "../../product.type";
 import toast from "react-hot-toast";
-import Button from "../../../shared/components/Button";
+import Button from "../../../../shared/components/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Plus } from "lucide-react";
-import { getImagePath } from "../../../shared/utils/helper.utils";
+import { getImagePath } from "../../../../shared/utils/helper.utils";
+import Loading from "../../../../shared/components/Loading";
 
 const { TextArea } = Input;
 
-interface IProps {
-  kind: "create" | "update";
-}
-
-const CreateProductForm = ({ kind }: IProps) => {
+const EditProductForm = () => {
   const { id } = useParams();
   const { data: product, isLoading } = useProductById(id!);
-  const { mutateAsync: createProduct } = useCreateProduct();
-  const { mutateAsync: editProduct } = useUpdateProduct();
+  const { mutateAsync } = useUpdateProduct();
   const [form] = Form.useForm();
   const [image, setImage] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
-  const mutateAsync = kind === "create" ? createProduct : editProduct;
 
   const initialValues = product
     ? {
@@ -55,13 +46,14 @@ const CreateProductForm = ({ kind }: IProps) => {
   }, [product, image]);
 
   const handleBack = () => {
-    navigate("/admin/create");
+    navigate("/admin");
   };
 
-  const handleSubmit = async (data: IAddProduct) => {
+  const handleSubmit = async (data: IUpdateProduct) => {
     try {
       await mutateAsync(data);
       form.resetFields();
+
       toast.success("Product added successfully");
     } catch (error) {
       toast.error("Failed to add product");
@@ -81,16 +73,19 @@ const CreateProductForm = ({ kind }: IProps) => {
     }
   };
 
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (isLoading) {
+    return (
+      <div className="form">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="form" style={{ maxWidth: 820 }}>
       <div className="-description">
         <Button onClick={handleBack}>Go back</Button>
-        <h1>Let&apos;s add new product into the system</h1>
-        <p>Fill the form to add new product to let others borrow this item</p>
+        <h1>Edit Product Form</h1>
         <div className="-image">
           <img
             src={image || "/assets/no-image.png"}
@@ -174,4 +169,4 @@ const CreateProductForm = ({ kind }: IProps) => {
   );
 };
 
-export default CreateProductForm;
+export default EditProductForm;

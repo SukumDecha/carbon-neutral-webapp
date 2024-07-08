@@ -43,7 +43,7 @@ function StoreScreen() {
               <img src={getImagePath(item.image_url)} alt="" />
               <p>{item.name}</p>
               <p>{item.point_cost} Point</p>
-              <Link to={`/product/${item.name}`}>
+              <Link to={`/product/${item.id}`}>
                 <Button>Buy</Button>
               </Link>
             </div>

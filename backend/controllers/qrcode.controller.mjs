@@ -29,4 +29,20 @@ router.get("/api/uploads/:directoryName/:fileName", async (req, res) => {
   }
 });
 
+router.get("/api/uploads/:directoryName/:fileName", async (req, res) => {
+  const { directoryName, fileName } = req.params;
+  console.log("directoryName:", directoryName);
+  console.log("fileName:", fileName);
+
+  const publicDir = path.join("public", "uploads");
+  const filePath = path.join(publicDir, directoryName, fileName);
+
+  try {
+    const file = await readFile(filePath);
+    res.status(200).send(file);
+  } catch (error) {
+    handleErrors(res, error, "Failed to fetch file");
+  }
+});
+
 export default router;

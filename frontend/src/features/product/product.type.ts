@@ -7,22 +7,14 @@ export type IProduct = {
   quantity: number;
 };
 
-export type IAddProduct = {
-  name: string;
-  description: string;
-  point_cost: number;
-  quantity: number;
+export type IAddProduct = Omit<IProduct, "id"> & {
   image: {
     fileList: { originFileObj: File }[];
   };
 };
 
-export type IUpdateProduct = {
-  id?: number;
-  name?: string;
-  description?: string;
-  point_cost?: number;
-  quantity?: number;
+export type IUpdateProduct = Partial<IProduct> & {
+  id: number;
   image?: {
     fileList: { originFileObj: File }[];
   };

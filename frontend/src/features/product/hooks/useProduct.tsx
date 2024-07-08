@@ -9,7 +9,7 @@ import {
 
 export const useProduct = () => {
   return useQuery({
-    queryKey: ["carts"],
+    queryKey: ["products"],
     queryFn: findAllProducts,
     staleTime: 1000 * 60 * 5,
   });
@@ -17,7 +17,7 @@ export const useProduct = () => {
 
 export const useProductById = (productId: string) => {
   return useQuery({
-    queryKey: ["product", productId],
+    queryKey: ["products", productId],
     queryFn: () => findProductById(productId),
     staleTime: 1000 * 60 * 5,
   });
