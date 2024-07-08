@@ -55,7 +55,6 @@ router.post(
       quantity: req.body.quantity,
       imagePath: req.file,
     };
-    await addProduct(productData);
 
     try {
       await addProduct(req.body);

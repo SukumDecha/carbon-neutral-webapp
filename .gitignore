@@ -3,6 +3,7 @@
 # dependencies
 client-ui/node_modules
 backend/node_modules
+backend/public/uploads
 /.pnp
 .pnp.js
 .yarn/install-state.gz
