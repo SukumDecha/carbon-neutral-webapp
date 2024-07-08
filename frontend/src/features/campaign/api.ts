@@ -67,12 +67,13 @@ export const createCampaign = async (data: IAddCampaign) => {
 };
 
 export const updateCampaign = async (data: IUpdateCampaign) => {
+  console.log(data);
   const formData = new FormData();
   if (data.title) formData.append("title", data.title);
   if (data.content) formData.append("content", data.content);
   if (data.startDate) formData.append("startDate", data.startDate);
   if (data.endDate) formData.append("endDate", data.endDate);
-  if (data.image)
+  if (data.image?.fileList[0])
     formData.append("image", data.image.fileList[0].originFileObj);
 
   const res = await fetch(`http://localhost:3000/api/campaigns/${data.id}`, {

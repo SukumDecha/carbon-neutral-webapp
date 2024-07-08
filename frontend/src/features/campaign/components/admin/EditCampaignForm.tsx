@@ -27,13 +27,14 @@ const EditCampaignForm = () => {
 
   const initialValues = campaign
     ? {
+        id: campaign.id,
         title: campaign.title,
         content: campaign.content,
         image: {
           fileList: [], // Initialize with appropriate default value
         },
-        startDate: campaign.startDate,
-        endDate: campaign.endDate,
+        dateRange: undefined,
+        donation_goal: campaign.donation_goal,
       }
     : {
         title: "",
@@ -56,6 +57,9 @@ const EditCampaignForm = () => {
 
       data = { ...data, startDate, endDate };
     }
+
+    data = { ...data, id: campaign!.id };
+
     try {
       await mutateAsync(data);
       form.resetFields();
@@ -144,20 +148,10 @@ const EditCampaignForm = () => {
         >
           <InputNumber placeholder="Enter amount" />
         </Form.Item>
-        <Form.Item
-          label="Start Date and End Date"
-          name="dateRange"
-          rules={[{ required: true, message: "Please select a date range!" }]}
-        >
+        <Form.Item label="Start Date and End Date" name="dateRange">
           <RangePicker />
         </Form.Item>
-        <Form.Item
-          label="Upload campaign's picture"
-          name="image"
-          rules={[
-            { required: true, message: "Please upload a campaign picture" },
-          ]}
-        >
+        <Form.Item label="Upload campaign's picture" name="image">
           <Upload
             listType="picture-card"
             maxCount={1}
@@ -172,7 +166,7 @@ const EditCampaignForm = () => {
         </Form.Item>
         <Form.Item>
           <Button type="secondary" htmlType="submit">
-            Create campaign
+            Update campaign
           </Button>
         </Form.Item>
       </Form>
