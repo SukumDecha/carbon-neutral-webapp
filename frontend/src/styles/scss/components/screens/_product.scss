@@ -1,39 +1,57 @@
-.product{
-    color: var(--Nigger, #000);
+.product-item {
+    color: #000;
     font-family: Manrope;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
-    line-height: 20px; /* 125% */
-    min-height: 100vh;
+    line-height: 20px; 
     background: #F9EEDA;
     display: flex;
     flex-direction: column;
-    
-    img{
+    align-items: center;
+    min-height: 100vh;
+    img {
         width: 100%;
+        height: auto;
     }
-    p{
-        margin: 2%;
-        margin-left: 8%;
-        margin-right: 8%;
-        
+
+    p {
+        margin: 0;
     }
-    .title{
+
+    .-desc {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .-title{
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
         margin-top: 5%;
-        font-weight: 700;
-        font-size: 25px;
+
+        p {
+            font-weight: 700;
+            font-size: 25px;
+        }
     }
-    .Free{
-        margin-top: 2%;
-        margin-left: 8%;
+
+    .-shipping{
+        margin-top: calc(auto - 100px);
         font-weight: 700;
         font-size: 18px;
         display: flex;
         gap: .5rem;
+        justify-content: start;
         align-items: center;
     }
-    .radian{
+
+    .-line{
         background: var(--Nigger, #000);
         box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.25);
         width: 100%;

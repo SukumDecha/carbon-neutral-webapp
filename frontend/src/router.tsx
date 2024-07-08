@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomeScreen from "./screens/HomeScreen";
@@ -8,7 +7,6 @@ import Layout from "./shared/components/layouts/Layout";
 import AuthScreen from "./screens/AuthScreen";
 import AuthLayout from "./shared/components/layouts/AuthLayout";
 import TrackerScreen from "./screens/TrackerScreen";
-import ProductScreen from "./screens/ProductScreen";
 import CampaignScreen from "./screens/CampaignScreen";
 import UserProfile from "./features/user/components/UserProfile";
 import AdminScreen from "./screens/admin/AdminScreen";
@@ -21,8 +19,13 @@ import BlogDetails from "./features/blog/components/BlogDetails";
 
 import "./styles/scss/components/index.scss";
 import CampaignDetails from "./features/campaign/components/CampaignDetails";
-import DonateScreen from "./features/donate/components/DonateItem";
 import CartScreen from "./screens/CartScreen";
+import { Toaster } from "react-hot-toast";
+import DonateScreen from "./screens/DonateScreen";
+import EditCampaignForm from "./features/campaign/components/admin/EditCampaignForm";
+import EditBlogForm from "./features/blog/components/admin/EditBlogForm";
+import EditProductForm from "./features/product/components/admin/EditProductForm";
+import ProductDetails from "./features/product/components/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -46,13 +49,24 @@ const router = createBrowserRouter([
         element: <CampaignScreen />,
       },
       {
+        path: "/campaign/:id",
+        element: <CampaignDetails />,
+      },
+      {
+        path: "/campaign/edit/:id",
+        element: <EditCampaignForm />,
+      },
+      {
         path: "/exchange",
         element: <StoreScreen />,
       },
       {
+        path: "/product/edit/:id",
+        element: <EditProductForm />,
+      },
+      {
         path: "/product/:id",
-        element: <ProductScreen />,
-        loader: () => fetch("http://localhost:3000/api/products"),
+        element: <ProductDetails />,
       },
       {
         path: "/blogs",
@@ -63,12 +77,8 @@ const router = createBrowserRouter([
         element: <BlogDetails />,
       },
       {
-        path: "/campaigns",
-        element: <CampaignScreen />,
-      },
-      {
-        path: "/campaign/:id",
-        element: <CampaignDetails />,
+        path: "/blogs/edit/:id",
+        element: <EditBlogForm />,
       },
       {
         path: "/donate",
@@ -86,7 +96,7 @@ const router = createBrowserRouter([
         path: "*",
         element: (
           <EmptyBox>
-            <h1>This page doesn't existed</h1>
+            <h1>This page doesn't exist</h1>
           </EmptyBox>
         ),
       },
@@ -112,6 +122,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ClientProviders>
       <Suspense fallback={<Loading />}>
+        <Toaster />
         <RouterProvider router={router} />
       </Suspense>
     </ClientProviders>

@@ -28,12 +28,12 @@ const linkTo = [
   },
   {
     title: "Tree",
-    path: "/campaign",
+    path: "/campaign/tree",
     img: <Trees size={32} />,
   },
   {
     title: "Coral",
-    path: "/campaign/coral",
+    path: "/campaign/coral/coral",
     img: <Fish size={32} />,
   },
   {
@@ -63,7 +63,7 @@ const HomeScreen = () => {
       </div>
       <div className="-boxes">
         <div className="animated-earth">
-          <img src="earth.jpg" alt="Earth" className="rotate" />
+          <img src="" alt="Earth" className="rotate" />
         </div>
       </div>
       <div className="-product-list">
@@ -72,8 +72,8 @@ const HomeScreen = () => {
             <img src={getImagePath(product.image_url)} alt={product.name} />
             <p>{product.name}</p>
             <p>{product.point_cost} Point</p>
-            <Link to={`/product/${product.name}`}>
-              <button>Buy</button>
+            <Link to={`/product/${product.id}`}>
+              <button>View </button>
             </Link>
           </div>
         ))}

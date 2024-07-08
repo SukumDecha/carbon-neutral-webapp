@@ -26,6 +26,5 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/shared/utils/helper.ts" // Add this line
   ]
 }

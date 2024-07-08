@@ -1,4 +1,5 @@
 import {
+  CirclePlus,
   CircleUserRound,
   HandHeart,
   House,
@@ -43,8 +44,26 @@ const navigation: INavigation[] = [
 ];
 
 const Footer = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
+  if (pathname.startsWith("/product"))
+    return (
+      <div className="footer-shop">
+        <div className="-wrap">
+          <div className="-col">
+            <CirclePlus />
+            <p>Add to Basket</p>
+          </div>
+        </div>
+
+        <div className="-wrap">
+          <div className="-col">
+            <ShoppingCart />
+            <p>Exchange</p>
+          </div>
+        </div>
+      </div>
+    );
   return (
     <div className="footer">
       {navigation.map((item) => {
