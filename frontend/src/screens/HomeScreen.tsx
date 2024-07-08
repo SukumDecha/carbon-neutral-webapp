@@ -5,6 +5,9 @@ import { Trees } from "lucide-react";
 import { Fish } from "lucide-react";
 import { Utensils } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useProduct } from "../features/product/hooks/useProduct";
+import Loading from "../shared/components/Loading";
+import EmptyBox from "../shared/components/EmptyBox";
 
 const linkTo = [
   {
@@ -40,6 +43,12 @@ const linkTo = [
 ];
 
 const HomeScreen = () => {
+  const { data: products, isLoading } = useProduct();
+
+  if (isLoading) return <Loading />;
+
+  if (!products) return <EmptyBox />;
+
   return (
     <div className="HomeScreen">
       <div className="intro">Let’s save our planet Together</div>
@@ -67,8 +76,9 @@ const HomeScreen = () => {
               <button>Buy</button>
             </Link>
           </div>
+
           <div className="-item">
-          <img src="shirt.png" alt="" />
+            <img src="shirt.png" alt="" />
             <p>T-Shirt</p>
             <p>100 Point</p>
             {/* fix link to item name link */}
@@ -76,9 +86,6 @@ const HomeScreen = () => {
               <button>Buy</button>
             </Link>
           </div>
-          <div className="-item">s</div>
-          <div className="-item">s</div>
-
         </div>
       </div>
     </div>
