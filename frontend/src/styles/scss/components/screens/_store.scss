@@ -1,7 +1,8 @@
-.storescreen{
+.Storecreen{
     min-height: 100vh;
     background-color: antiquewhite;
-    .searchPanel{
+
+    .-searchPanel{
         display: flex;
         width: 100%;
         height: 66px;
@@ -12,7 +13,10 @@
         border-radius: 0px 0px 12px 12px;
         background: #5B4F39;
         box-shadow: 0px 2px 1px 5px rgba(0, 0, 0, 0.25);
-        input{
+
+        input {
+            width: 60%;
+            padding: 4px;
             border-radius: 10px;
         }
     }
@@ -26,7 +30,7 @@
 
     }
     
-    .item{
+    .-item{
         margin: 5%;
         display: flex;
         border-radius: 20%;

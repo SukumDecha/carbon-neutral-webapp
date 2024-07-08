@@ -1,32 +1,25 @@
-import { Truck } from 'lucide-react';
-import React from 'react'
+import { useParams } from "react-router-dom";
+import ProductItem from "../features/product/components/ProductItem";
+import { useProductById } from "../features/product/hooks/useProduct";
+import EmptyBox from "../shared/components/EmptyBox";
+import { useSelector } from "react-redux";
+import { RootState } from "../stores/store";
 
-interface IProduct {
-  title: string;
-  img: string;
-  point: number;
-  description: string;
-  quantity: number;
-}
+const ProductScreen = () => {
+  const { id } = useParams();
+  const { data: product } = useProductById(id!);
+  const items = useSelector((state: RootState) => state.carts);
 
-interface IProps {
-  product: IProduct;
-}
+  console.log(items);
+  if (!product) {
+    return (
+      <EmptyBox>
+        <p>Product not found</p>
+      </EmptyBox>
+    );
+  }
 
-const ProductScreen = ({ product }: IProps) => {
-  return (
-    <div className='product'>
-      <img src={product.img} alt={product.title} />
-      <div className='radian'></div>
-      <p className='title'>{product.title}</p>
-      <p className='title'>{product.point} Point</p>
-      <p>Quantity : {product.quantity}</p>
-      <p>{product.description}</p>
-      <div className='Free'>Free Shipping <Truck /></div>
-      
-        
-    </div>
-  )
-}
+  return <ProductItem product={product} />;
+};
 
-export default ProductScreen
+export default ProductScreen;

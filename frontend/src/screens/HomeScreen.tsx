@@ -107,7 +107,15 @@ const HomeScreen = () => {
               <button>Buy</button>
             </Link>
           </div>
-          
+          <div className="-item">
+          <img src="shirt.png" alt="" />
+            <p>T-Shirt</p>
+            <p>100 Point</p>
+            {/* fix link to item name link */}
+            <Link to={`/product/T-Shirt`}>
+              <button>Buy</button>
+            </Link>
+          </div>
           <div className="-item">s</div>
           <div className="-item">s</div>
 
