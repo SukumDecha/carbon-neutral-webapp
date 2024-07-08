@@ -47,8 +47,8 @@ const TrackerScreen = () => {
         <div className="-line">
           <h2>Fuel Type </h2>
           <select name="gas" id="gas" onChange={handleFuelTypeChange}>
-            <option value="gasoline">Bensin</option>
-            <option value="diesel">Diesel</option>
+            <option className="option" value="gasoline">Bensin</option>
+            <option className="option" value="diesel">Diesel</option>
             <option value="hybrid">Hybrid</option>
           </select>
         </div>
