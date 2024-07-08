@@ -7,10 +7,18 @@ import {
   findAllProducts,
   findProductById,
 } from "../services/product.service.mjs";
+import multer from "multer";
 import { handleErrors } from "../utils/helpers.mjs";
 import { handleGuard } from "./middlewares/jwt.middleware.mjs";
 
 const router = Router();
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // Limit file size to 5 MB (adjust as needed)
+  },
+});
 
 // Get all products
 router.get("/api/products", async (_req, res) => {
@@ -35,14 +43,29 @@ router.get("/api/products/:id", async (req, res) => {
 });
 
 // Add Product
-router.post("/api/products", handleGuard, async (req, res) => {
-  try {
-    await addProduct(req.body);
-    res.status(200).json({ message: "Product created successfully" });
-  } catch (error) {
-    handleErrors(res, error, "Failed to create product");
+router.post(
+  "/api/products",
+  handleGuard,
+  upload.single("file"),
+  async (req, res) => {
+    const productData = {
+      name: req.body.name,
+      description: req.body.description,
+      point_cost: req.body.point_cost,
+      quantity: req.body.quantity,
+      imagePath: req.file,
+    };
+    
+    await addProduct(productData);
+
+    try {
+      await addProduct(req.body);
+      res.status(200).json({ message: "Product created successfully" });
+    } catch (error) {
+      handleErrors(res, error, "Failed to create product");
+    }
   }
-});
+);
 
 // Update Product
 router.patch("/api/products/:id", handleGuard, async (req, res) => {

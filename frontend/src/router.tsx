@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/api/products"),
       },
       {
-        path: "/admin/create/:id",
+        path: "/admin/create",
         element: <CreateScreen />,
       },
       {

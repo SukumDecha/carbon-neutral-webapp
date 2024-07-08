@@ -1,7 +1,9 @@
 import { IAddProduct, IProduct, IUpdateProduct } from "./product.type";
 // Fetch all products
 export const findAllProducts = async () => {
-  const res = await fetch("http://localhost:3000/api/products");
+  const res = await fetch("http://localhost:3000/api/products", {
+    method: "GET",
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch product list");
   }
@@ -21,6 +23,7 @@ export const findProductById = async (productId: string) => {
 };
 
 export const createProduct = async (data: IAddProduct) => {
+  console.log(data);
   const formData = new FormData();
   formData.append("name", data.name);
   formData.append("description", data.description);
