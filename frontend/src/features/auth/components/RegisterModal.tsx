@@ -9,17 +9,19 @@ const RegisterModal = () => {
     navigate("/auth/login");
   };
 
+ 
+
   return (
     <>
       <h1 className="-title">Register</h1>
       <div className="-auth-modal">
-        <form>
+        <form >
           <label htmlFor="name">Username</label>
           <input name="name" placeholder="jonathan"></input>
 
           <label htmlFor="email">Email</label>
           <input name="email" placeholder="jonathan123@gmail.com"></input>
-
+ 
           <label htmlFor="password">Password</label>
           <input name="password" placeholder="password"></input>
 

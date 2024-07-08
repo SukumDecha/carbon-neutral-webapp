@@ -89,12 +89,15 @@
   
 
   .animated-earth {
-    width: 20px;
+    width: 100px;
     margin-left: 4%;
     animation: move 5s infinite;
     display: inline-block;
+    margin-top: 4%;
+    margin-bottom: 0;
   }
   .rotate {
+    
     width: 60px;
     animation: rotate 10s linear infinite;
   }
@@ -109,6 +112,10 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
+    p{
+      margin: 0;
+      
+    }
     
   }
 

@@ -1,16 +1,25 @@
-import Header from "./Header";
+import Header, { HeaderSetting } from "./Header";
 import Footer from "./Footer";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
+  const { pathname } = useLocation();
+  
+  
   return (
     <div
       style={{
         position: "relative",
       }}
     >
-      <Header />
+      {
+         pathname === "/profile" || pathname === "/personal" ? <></> : <></>
+      }
+      {
+         pathname === "/personal" || "/cart" ? <HeaderSetting/> : <Header/>
+      }
+      
       <div
         style={{
           minHeight: "calc(100vh)",

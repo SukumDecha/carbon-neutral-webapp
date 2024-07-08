@@ -16,4 +16,22 @@
         font-size: 16px;
         font-weight: 500;
     }
+   
+}
+
+.HeaderSetting{
+    background-color: #5B4F39;
+    height: 92px;
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    color: white;
+    align-items: center;
+    font-family: "Source Sans Pro";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    background: #5B4F39;
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.30);
+
 }
