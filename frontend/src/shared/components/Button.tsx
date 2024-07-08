@@ -2,19 +2,19 @@ import { ReactNode } from "react";
 
 interface IProps {
   children: ReactNode;
-  primary?: boolean;
+  type?: "primary" | "secondary";
   htmlType?: "button" | "reset" | "submit";
   onClick?: () => void;
 }
 const Button = ({
   children,
   htmlType = "button",
-  primary = true,
+  type = "primary",
   onClick,
 }: IProps) => {
   return (
     <button
-      className={`button -${primary ? "primary" : "secondary"}`}
+      className={`button -${type}`}
       role="button"
       type={htmlType}
       onClick={onClick}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -9,17 +9,15 @@ import AuthScreen from "./screens/AuthScreen";
 import "./styles/scss/components/index.scss";
 import AuthLayout from "./shared/components/layouts/AuthLayout";
 import TrackerScreen from "./screens/TrackerScreen";
-import StoreSreen from "./screens/StoreSreen";
 import ProductScreen from "./screens/ProductScreen";
 import CampaignScreen from "./screens/CampaignScreen";
+import UserProfile from "./features/user/components/UserProfile";
+import ExchangeScreen from "./screens/ExchangeScreen";
+import CreateScreen from "./screens/admin/AdminScreen";
+import ClientProviders from "./shared/components/providers/ClientProviders";
+import Loading from "./shared/components/Loading";
+import EmptyBox from "./shared/components/EmptyBox";
 
-const mockupItem = {
-  title: "King",
-  img: "/shirt2.png",
-  point: 100,
-  description: "skibidi dop dopdopo",
-  quantity: 20,
-};
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +28,10 @@ const router = createBrowserRouter([
         element: <HomeScreen />,
       },
       {
+        path: "/profile",
+        element: <UserProfile />,
+      },
+      {
         path: "/tracker",
         element: <TrackerScreen />,
       },
@@ -38,24 +40,22 @@ const router = createBrowserRouter([
         element: <CampaignScreen />,
       },
       {
-        path: "/store",
-        element: <StoreSreen />,
+        path: "/exchange",
+        element: <ExchangeScreen />,
       },
-      { path: "/product/:id", element: <ProductScreen product={mockupItem} /> },
-      // {
-      //   path: "/applied",
-      //   element: <AppliedJobs />,
-      //   loader: () => fetch("../public/jobs.json"),
-      // },
-      // {
-      //   path: "/blog",
-      //   element: <Blog />,
-      // },
-      // {
-      //   path: "job/:id",
-      //   element: <JobDetails></JobDetails>,
-      //   loader: () => fetch("../public/jobs.json"),
-      // },
+      {
+        path: "/product/:id",
+        element: <ProductScreen />,
+        loader: () => fetch("http://localhost:3000/api/products"),
+      },
+      {
+        path: "/admin/create/:id",
+        element: <CreateScreen />,
+      },
+      {
+        path: "*",
+        element: <EmptyBox />,
+      },
     ],
   },
   {
@@ -76,6 +76,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ClientProviders>
+      <Suspense fallback={<Loading />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </ClientProviders>
   </React.StrictMode>
 );
