@@ -26,6 +26,8 @@ import EditCampaignForm from "./features/campaign/components/admin/EditCampaignF
 import EditBlogForm from "./features/blog/components/admin/EditBlogForm";
 import EditProductForm from "./features/product/components/admin/EditProductForm";
 import ProductDetails from "./features/product/components/ProductDetails";
+import { HistoryScreen } from "./screens/HistoryScreen";
+import { StatisticScreen } from "./screens/StatisticScreen";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,18 @@ const router = createBrowserRouter([
         element: <UserProfile />,
       },
       {
+        path: "/profile/history",
+        element: <HistoryScreen />,
+      },
+      {
+        path: "/profile/statistic",
+        element: <StatisticScreen />,
+      },
+      {
+        path: "/carts",
+        element: <CartScreen />,
+      },
+      {
         path: "/tracker",
         element: <TrackerScreen />,
       },
@@ -49,11 +63,11 @@ const router = createBrowserRouter([
         element: <CampaignScreen />,
       },
       {
-        path: "/campaign/:id",
+        path: "/campaign/:name",
         element: <CampaignDetails />,
       },
       {
-        path: "/campaign/edit/:id",
+        path: "/campaign/edit/:name",
         element: <EditCampaignForm />,
       },
       {
@@ -95,7 +109,7 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: (
-          <EmptyBox>
+          <EmptyBox redirectBtn>
             <h1>This page doesn't exist</h1>
           </EmptyBox>
         ),

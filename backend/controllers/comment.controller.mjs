@@ -20,7 +20,7 @@ router.get("/api/comments", async (req, res) => {
 });
 
 router.post("/api/comments", async (req, res) => {
-  const { id: userId } = req.user;
+  const userId = req.user.id;
 
   try {
     await createComment(req.body, userId);
@@ -32,7 +32,7 @@ router.post("/api/comments", async (req, res) => {
 
 router.patch("/api/comments/:id", async (req, res) => {
   const { id } = req.params;
-  
+
   try {
     await updateComment(id, req.body);
     return res.status(200).json({ message: "Comment updated" });

@@ -14,11 +14,11 @@ export function createApp() {
 
   app.use(
     cors({
-      origin: "*",
+      origin: "http://127.0.0.1:5173",
       credentials: true,
     })
   );
-
+  
   app.use(cookieParser("my-secret"));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -31,9 +31,6 @@ export function createApp() {
 const createTableIfExist = async () => {
   try {
     const connection = await pool.getConnection();
-
-    await connection.query(`
-    CREATE DATABASE IF NOT EXISTS carbon_neutral_app`);
 
     // Create users table
     await connection.query(`

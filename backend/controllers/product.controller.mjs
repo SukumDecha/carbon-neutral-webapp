@@ -66,16 +66,26 @@ router.post(
 );
 
 // Update Product
-router.patch("/api/products/:id", handleGuard, async (req, res) => {
-  const { id } = req.params;
+router.patch(
+  "/api/products/:id",
+  handleGuard,
+  upload.single("image"),
+  async (req, res) => {
+    const { id } = req.params;
 
-  try {
-    await updateProduct(id, req.body);
-    res.status(200).json({ message: "Product updated successfully" });
-  } catch (error) {
-    handleErrors(res, error, "Failed to update product");
+    const updatedProduct = {
+      ...req.body,
+      imagePath: req.file,
+    };
+
+    try {
+      await updateProduct(id, updatedProduct);
+      res.status(200).json({ message: "Product updated successfully" });
+    } catch (error) {
+      handleErrors(res, error, "Failed to update product");
+    }
   }
-});
+);
 
 // Remove Product
 router.delete("/api/products/:id", handleGuard, async (req, res) => {
@@ -90,10 +100,11 @@ router.delete("/api/products/:id", handleGuard, async (req, res) => {
 });
 
 // Sell Product
-router.put("/api/products/:id/sell", async (req, res) => {
+router.put("/api/sell/:id", handleGuard, async (req, res) => {
   const { id: productId } = req.params;
-  const { id: userId } = req.user;
-  const { quantity } = req.body;
+  const userId = req.user.id;
+  const { quantity } = req.query;
+
   try {
     await sellProduct(productId, quantity, userId);
     res.status(200).json({ message: "Product sold successfully" });

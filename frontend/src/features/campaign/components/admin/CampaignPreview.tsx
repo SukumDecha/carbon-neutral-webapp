@@ -17,7 +17,7 @@ const CampaignPreview = ({ campaign }: IProps) => {
   const { mutateAsync } = useDeleteCampaign();
 
   const handleEdit = () => {
-    navigate(`/campaign/edit/${campaign.id}`);
+    navigate(`/campaign/edit/${campaign.name}`);
   };
 
   const handleDelete = async () => {
@@ -65,6 +65,7 @@ const CampaignPreview = ({ campaign }: IProps) => {
   return (
     <Card
       hoverable
+      style={{ width: 300 }}
       className="-campaign-item"
       cover={<img alt="example" src={getImagePath(campaign.image_url)} />}
     >

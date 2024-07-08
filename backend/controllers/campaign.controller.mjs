@@ -2,7 +2,9 @@ import {
   addDonation,
   createCampaign,
   findAllCampaigns,
+  findCampaignByName,
   updateCampaign,
+  getTopDonors,
 } from "../services/campaign.service.mjs";
 import { handleErrors } from "../utils/helpers.mjs";
 import { Router } from "express";
@@ -35,9 +37,18 @@ router.get("/api/campaigns/:name", async (req, res) => {
     handleErrors(res, error, "Error fetching campaign");
   }
 });
+
+router.get("/api/campaigns/:name", async (req, res) => {
+  try {
+    const campaign = await findCampaignByName(req.params.name);
+    res.json(campaign);
+  } catch (error) {
+    handleErrors(res, error, "Error fetching campaign");
+  }
+});
 //Api when we scan only
 router.patch("/api/campaigns/:id", async (req, res) => {
-  const { id: userId } = req.user;
+  const userId = req.user.id;
   const { id: campaignId } = req.params;
 
   const { filter, amount } = req.query;
@@ -51,7 +62,7 @@ router.patch("/api/campaigns/:id", async (req, res) => {
     }
   } else if (filter === "top_donations") {
     try {
-      const topDonations = await getTopDonations(req.params.id);
+      const topDonations = await getTopDonors(req.params.id);
       res.status(200).json(topDonations);
     } catch (error) {
       handleErrors(res, error, "Error fetching top donations");
@@ -66,26 +77,12 @@ router.patch("/api/campaigns/:id", async (req, res) => {
   }
 });
 
-router.post(
-  "/api/campaigns",
-  handleGuard,
-  upload.single("image"),
-  async (req, res) => {
-    const campaignData = {
-      title: req.body.title,
-      description: req.body.description,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      donation_goal: req.body.donation_goal,
-      image: req.file,
-    };
-
-    try {
-      await createCampaign(campaignData);
-      res.status(201).json({ message: "Campaign created successfully" });
-    } catch (error) {
-      handleErrors(res, error, "Error creating campaign");
-    }
+router.post("/api/campaigns", handleGuard, async (req, res) => {
+  try {
+    await createCampaign(req.body);
+    res.status(201).json({ message: "Campaign created successfully" });
+  } catch (error) {
+    handleErrors(error, res, "Error creating campaign");
   }
 );
 

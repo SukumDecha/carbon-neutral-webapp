@@ -7,6 +7,7 @@ export const findAllProducts = async () => {
   if (!res.ok) {
     throw new Error("Failed to fetch product list");
   }
+
   return (await res.json()) as IProduct[];
 };
 
@@ -39,7 +40,7 @@ export const createProduct = async (data: IAddProduct) => {
   return { success: res.ok };
 };
 
-export const updateProduct = async (data: IUpdateProduct) => {
+export const updateProduct = async (id: number, data: IUpdateProduct) => {
   const formData = new FormData();
   if (data.name) formData.append("name", data.name);
   if (data.description) formData.append("description", data.description);
@@ -49,7 +50,7 @@ export const updateProduct = async (data: IUpdateProduct) => {
   if (data.image)
     formData.append("image", data.image.fileList[0].originFileObj);
 
-  const res = await fetch(`http://localhost:3000/api/products/${data.id}`, {
+  const res = await fetch(`http://localhost:3000/api/products/${id}`, {
     method: "PATCH",
     body: formData,
     credentials: "include",
@@ -65,4 +66,23 @@ export const deleteProduct = async (id: number) => {
   });
 
   return { success: res.ok };
+};
+
+export const claimProduct = async (id: number, quantity: number) => {
+  const res = await fetch(
+    `http://localhost:3000/api/sell/${id}?quantity=${quantity}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    }
+  );
+
+  if (!res.ok) {
+    const { error } = await res.json();
+    throw new Error(error);
+  }
 };

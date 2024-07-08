@@ -17,26 +17,24 @@ const { TextArea } = Input;
 
 const EditProductForm = () => {
   const { id } = useParams();
+
   const { data: product, isLoading } = useProductById(id!);
-  const { mutateAsync } = useUpdateProduct();
+  const { mutateAsync } = useUpdateProduct(Number(id));
   const [form] = Form.useForm();
   const [image, setImage] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
 
   const initialValues = product
     ? {
-        name: product.name,
-        description: product.description,
-        quantity: product.quantity,
-        point_cost: product.point_cost,
-        image: getImagePath(product.image_url),
+        ...product,
+        image: undefined,
       }
     : {
         name: "",
         description: "",
         quantity: 1,
         point_cost: 1,
-        image: "",
+        image: undefined,
       };
 
   useEffect(() => {
@@ -52,11 +50,12 @@ const EditProductForm = () => {
   const handleSubmit = async (data: IUpdateProduct) => {
     try {
       await mutateAsync(data);
-      form.resetFields();
+      // window.location.reload();
 
-      toast.success("Product added successfully");
+      toast.success("Product updated successfully");
     } catch (error) {
-      toast.error("Failed to add product");
+      console.log(error);
+      toast.error("Failed to update product");
     }
   };
 
@@ -140,13 +139,7 @@ const EditProductForm = () => {
         >
           <InputNumber placeholder="Enter product point cost" />
         </Form.Item>
-        <Form.Item
-          label="Upload product's picture"
-          name="image"
-          rules={[
-            { required: true, message: "Please upload a product picture" },
-          ]}
-        >
+        <Form.Item label="Upload product's picture" name="image">
           <Upload
             listType="picture-card"
             maxCount={1}

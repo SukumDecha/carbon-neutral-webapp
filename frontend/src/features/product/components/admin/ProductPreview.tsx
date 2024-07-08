@@ -47,7 +47,7 @@ const ProductPreview = ({ product }: IProps) => {
     <Card
       hoverable
       style={{ width: 240 }}
-      className="-campaign-item"
+      className="-product-item"
       cover={<img alt="example" src={getImagePath(product.image_url)} />}
     >
       <Meta

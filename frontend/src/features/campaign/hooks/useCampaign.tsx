@@ -3,7 +3,8 @@ import {
   createCampaign,
   deleteCampaign,
   findAllCampaigns,
-  findCampaignById,
+  findCampaignByName,
+  findTopDonors,
   updateCampaign,
 } from "../api";
 
@@ -15,10 +16,18 @@ export const useCampaigns = () => {
   });
 };
 
-export const useCampaignById = (productId: string) => {
+export const useCampaignByName = (productId: string) => {
   return useQuery({
     queryKey: ["campaigns", productId],
-    queryFn: () => findCampaignById(productId),
+    queryFn: () => findCampaignByName(productId),
+    staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const useTopDonors = () => {
+  return useQuery({
+    queryKey: ["campaigns", "topDonors"],
+    queryFn: () => findTopDonors(),
     staleTime: 1000 * 60 * 5,
   });
 };

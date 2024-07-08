@@ -3,9 +3,11 @@ import {
   createUser,
   findAllUsers,
   findUserById,
+  getClaimHistory,
   updateUser,
 } from "../services/user.service.mjs";
 import { handleErrors } from "../utils/helpers.mjs";
+import { handleGuard } from "./middlewares/jwt.middleware.mjs";
 
 const router = Router();
 
@@ -37,6 +39,16 @@ router.patch("/api/users/:id", async (req, res) => {
     res.status(200).json({ message: "User updated successfully" });
   } catch (error) {
     handleErrors(res, error, "Failed to update user");
+  }
+});
+
+router.get("/api/claimHistory", handleGuard, async (req, res) => {
+  try {
+    const history = await getClaimHistory(req.user);
+
+    res.status(200).json(history);
+  } catch (error) {
+    handleErrors(res, error, "Failed to fetch user");
   }
 });
 

@@ -2,19 +2,18 @@ import { CircleUserRound } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
 import { Settings } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   return (
     <div className="header">
-      <div className="-icon">
+      <Link to="/cart" className="-icon">
         <CircleUserRound />
-      </div>
+      </Link>
       <div className="-point-label">{0} POINT</div>
     </div>
   );
 };
-
 
 export const HeaderSetting = () => {
   const { pathname } = useLocation();
@@ -28,21 +27,20 @@ export const HeaderSetting = () => {
     } else if (pathname === "/cart") {
       setNamepath("Cart");
       setActive(false);
+    } else if (pathname === "/history") {
+      setNamepath("Purchaase History");
     }
   }, [pathname]);
 
-
   return (
     <div className="HeaderSetting">
-      <div><ChevronLeft /></div>
-      <div>{namepath}</div>
       <div>
-        {active && <Settings />}
+        <ChevronLeft />
       </div>
-      
+      <div>{namepath}</div>
+      <div>{active && <Settings />}</div>
     </div>
-  )
-}
-
+  );
+};
 
 export default Header;
