@@ -84,7 +84,7 @@ router.post("/api/campaigns", handleGuard, async (req, res) => {
   } catch (error) {
     handleErrors(error, res, "Error creating campaign");
   }
-);
+});
 
 router.delete("/api/campaigns/:id", handleGuard, async (req, res) => {
   const { campaignId } = req.params;

@@ -18,7 +18,7 @@ export function createApp() {
       credentials: true,
     })
   );
-  
+
   app.use(cookieParser("my-secret"));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
