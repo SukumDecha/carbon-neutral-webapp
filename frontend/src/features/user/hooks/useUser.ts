@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { IUser } from "../user.type";
+import Cookies from "js-cookie";
 
 export const fetchUser = async () => {
-  console.log("Running");
+  const accessToken = Cookies.get("accessToken");
 
   const res = await fetch("http://localhost:3000/api/user/status", {
     method: "GET",
-    credentials: "include",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
 
   if (!res.ok) {
