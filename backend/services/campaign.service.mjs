@@ -1,6 +1,6 @@
 import { executeQuery, formatDate } from "../utils/helpers.mjs";
 import { addTotalDonation } from "./user.service.mjs";
-import { saveFile } from "../utils/file.mjs";
+import { removeDirFromFile, saveFile } from "../utils/file.mjs";
 
 export const findAllCampaigns = async () => {
   const query = "SELECT * FROM campaigns";
@@ -54,8 +54,8 @@ export const updateCampaign = async (id, campaign) => {
   const fieldsToUpdate = {
     ...(title && { title }),
     ...(content && { content }),
-    ...(startDate && { startDate }),
-    ...(endDate && { endDate }),
+    ...(startDate && { startDate: formatDate(startDate) }),
+    ...(endDate && { endDate: formatDate(endDate) }),
     ...(donation_goal && { donation_goal }),
   };
 

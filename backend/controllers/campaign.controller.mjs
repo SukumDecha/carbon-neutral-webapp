@@ -47,44 +47,63 @@ router.get("/api/campaigns/:name", async (req, res) => {
   }
 });
 //Api when we scan only
-router.patch("/api/campaigns/:id", async (req, res) => {
-  const userId = req.user.id;
-  const { id: campaignId } = req.params;
+router.patch(
+  "/api/campaigns/:id",
+  handleGuard,
+  upload.single("image"),
+  async (req, res) => {
+    const userId = req.user.id;
+    const { id: campaignId } = req.params;
 
-  const { filter, amount } = req.query;
+    const { filter, amount } = req.query;
 
-  if (filter === "donation") {
-    try {
-      await addDonation(campaignId, userId, amount);
-      return res.status(200).json({ message: "Donation added successfully" });
-    } catch (error) {
-      handleErrors(res, error, "Error adding donation");
-    }
-  } else if (filter === "top_donations") {
-    try {
-      const topDonations = await getTopDonors(req.params.id);
-      res.status(200).json(topDonations);
-    } catch (error) {
-      handleErrors(res, error, "Error fetching top donations");
-    }
-  } else {
-    try {
-      await updateCampaign(req.params.id, req.body);
-      res.status(200).json({ message: "Campaign updated successfully" });
-    } catch (error) {
-      handleErrors(res, error, "Error updating campaign");
+    if (filter === "donation") {
+      try {
+        await addDonation(campaignId, userId, amount);
+        return res.status(200).json({ message: "Donation added successfully" });
+      } catch (error) {
+        handleErrors(res, error, "Error adding donation");
+      }
+    } else if (filter === "top_donations") {
+      try {
+        const topDonations = await getTopDonors(req.params.id);
+        res.status(200).json(topDonations);
+      } catch (error) {
+        handleErrors(res, error, "Error fetching top donations");
+      }
+    } else {
+      const updatedCampaign = {
+        ...req.body,
+        image: req.file,
+      };
+
+      try {
+        await updateCampaign(req.params.id, updatedCampaign);
+        res.status(200).json({ message: "Campaign updated successfully" });
+      } catch (error) {
+        handleErrors(res, error, "Error updating campaign");
+      }
     }
   }
-});
+);
 
-router.post("/api/campaigns", handleGuard, async (req, res) => {
-  try {
-    await createCampaign(req.body);
-    res.status(201).json({ message: "Campaign created successfully" });
-  } catch (error) {
-    handleErrors(error, res, "Error creating campaign");
+router.post(
+  "/api/campaigns",
+  handleGuard,
+  upload.single("image"),
+  async (req, res) => {
+    const createdCampaign = {
+      ...req.body,
+      image: req.file,
+    };
+    try {
+      await createCampaign(createdCampaign);
+      res.status(201).json({ message: "Campaign created successfully" });
+    } catch (error) {
+      handleErrors(error, res, "Error creating campaign");
+    }
   }
-});
+);
 
 router.delete("/api/campaigns/:id", handleGuard, async (req, res) => {
   const { campaignId } = req.params;

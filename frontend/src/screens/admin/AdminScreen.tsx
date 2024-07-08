@@ -8,8 +8,9 @@ import { Button, FloatButton, Modal } from "antd";
 import { useCampaigns } from "../../features/campaign/hooks/useCampaign";
 import CampaignPreview from "../../features/campaign/components/admin/CampaignPreview";
 import CreateProductForm from "../../features/product/components/admin/CreateProductForm";
-import CreateCampaignForm from "../../features/campaign/components/admin/EditCampaignForm";
+
 import { PlusCircleIcon } from "lucide-react";
+import CreateCampaignForm from "../../features/campaign/components/admin/CreateCampaignForm";
 
 export type IFeature = "blogs" | "products" | "campaigns";
 
@@ -140,6 +141,18 @@ const AdminScreen = () => {
       {feature === "products" && (
         <FloatButton
           tooltip={<div>Add new Product</div>}
+          onClick={showLoading}
+          icon={
+            <div className="-icon">
+              <PlusCircleIcon size={24} />
+            </div>
+          }
+        />
+      )}
+
+      {feature === "campaigns" && (
+        <FloatButton
+          tooltip={<div>Add new Campaigns</div>}
           onClick={showLoading}
           icon={
             <div className="-icon">
