@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import useUser from "../hooks/useUser";
+import { useUser } from "../hooks/useUser";
 
 const UserProfile = () => {
   const style: CSSProperties = {
@@ -7,7 +7,7 @@ const UserProfile = () => {
     flexDirection: "column",
   };
 
-  const user = useUser();
+  const { data: user } = useUser();
 
   if (!user) {
     return <div>User not found</div>;

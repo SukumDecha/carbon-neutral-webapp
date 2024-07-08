@@ -6,17 +6,23 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import Layout from "./shared/components/layouts/Layout";
 import AuthScreen from "./screens/AuthScreen";
-import "./styles/scss/components/index.scss";
 import AuthLayout from "./shared/components/layouts/AuthLayout";
 import TrackerScreen from "./screens/TrackerScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CampaignScreen from "./screens/CampaignScreen";
 import UserProfile from "./features/user/components/UserProfile";
-import ExchangeScreen from "./screens/ExchangeScreen";
-import CreateScreen from "./screens/admin/AdminScreen";
+import AdminScreen from "./screens/admin/AdminScreen";
 import ClientProviders from "./shared/components/providers/ClientProviders";
 import Loading from "./shared/components/Loading";
 import EmptyBox from "./shared/components/EmptyBox";
+import StoreScreen from "./screens/StoreScreen";
+import BlogScreen from "./screens/BlogScreen";
+import BlogDetails from "./features/blog/components/BlogDetails";
+
+import "./styles/scss/components/index.scss";
+import CampaignDetails from "./features/campaign/components/CampaignDetails";
+import DonateScreen from "./features/donate/components/DonateItem";
+import CartScreen from "./screens/CartScreen";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/exchange",
-        element: <ExchangeScreen />,
+        element: <StoreScreen />,
       },
       {
         path: "/product/:id",
@@ -49,12 +55,40 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/api/products"),
       },
       {
-        path: "/admin/create",
-        element: <CreateScreen />,
+        path: "/blogs",
+        element: <BlogScreen />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />,
+      },
+      {
+        path: "/campaigns",
+        element: <CampaignScreen />,
+      },
+      {
+        path: "/campaign/:id",
+        element: <CampaignDetails />,
+      },
+      {
+        path: "/donate",
+        element: <DonateScreen />,
+      },
+      {
+        path: "/admin",
+        element: <AdminScreen />,
+      },
+      {
+        path: "/cart",
+        element: <CartScreen />,
       },
       {
         path: "*",
-        element: <EmptyBox />,
+        element: (
+          <EmptyBox>
+            <h1>This page doesn't existed</h1>
+          </EmptyBox>
+        ),
       },
     ],
   },

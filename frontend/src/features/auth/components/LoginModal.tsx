@@ -23,23 +23,33 @@ const LoginModal = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const res = await fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+      credentials: "include",
     });
 
     if (!res.ok) {
-      toast.error("Invalid credentials");
+      const { error } = await res.json();
+      toast.error(error);
       return;
     }
 
     const { accessToken } = await res.json();
 
     toast.success("Login successful");
-    Cookies.set("accessToken", accessToken);
+
+    Cookies.set("accessToken", accessToken, {
+      domain: "localhost",
+      path: "/",
+      secure: false,
+      sameSite: "strict",
+    });
+
     setTimeout(() => {
       navigate("/profile");
     }, 1500);
@@ -86,7 +96,7 @@ const LoginModal = () => {
         </form>
 
         <div className="-footer">
-          <p>Don't have an acco  unt?</p>
+          <p>Don't have an acco unt?</p>
 
           <Button
             htmlType="submit"

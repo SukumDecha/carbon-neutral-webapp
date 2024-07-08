@@ -1,13 +1,10 @@
 import { Router } from "express";
-import { logout, register } from "../services/auth.service.mjs";
-import { handleGuard, handleLogin } from "./middlewares/jwt.middleware.mjs";
+import { logout, register, login, getMe } from "../services/auth.service.mjs";
+import { handleGuard } from "./middlewares/jwt.middleware.mjs";
 
 const router = Router();
 
-router.post("/api/auth/login", handleLogin, (request, response) => {
-  console.log("Logged in user:", request.user);
-  return response.sendStatus(200);
-});
+router.post("/api/auth/login", login);
 
 router.post("/api/auth/register", async (request, response) => {
   try {
@@ -18,17 +15,8 @@ router.post("/api/auth/register", async (request, response) => {
   }
 });
 
-router.get("/api/auth/status", handleGuard, (request, response) => {
-  console.log("User status:", request.user);
-  return request.user ? response.json(request.user) : response.sendStatus(401);
-});
+router.get("/api/auth/status", handleGuard, getMe);
 
-router.post("/api/auth/logout", handleGuard, (request, response) => {
-  if (!request.user) {
-    return response.sendStatus(401);
-  }
-
-  response.clearCookie("token");
-});
+router.post("/api/auth/logout", handleGuard, logout);
 
 export default router;
