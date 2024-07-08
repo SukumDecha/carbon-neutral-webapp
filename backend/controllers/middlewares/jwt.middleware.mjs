@@ -15,7 +15,7 @@ export const handleGuard = (req, res, next) => {
     }
 
     req.user = decoded.user;
-    console.log(req.user);
+    console.log("Authenticated user:", req.user);
     next();
   });
 };
