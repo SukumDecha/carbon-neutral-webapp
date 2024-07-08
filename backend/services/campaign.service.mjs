@@ -1,5 +1,6 @@
-import { executeQuery } from "../utils/helpers.mjs";
+import { executeQuery, formatDate } from "../utils/helpers.mjs";
 import { addTotalDonation } from "./user.service.mjs";
+import { saveFile } from "../utils/file.mjs";
 
 export const findAllCampaigns = async () => {
   const query = "SELECT * FROM campaigns";
@@ -12,36 +13,47 @@ export const findCampaignById = async (id) => {
   return await executeQuery(query, params);
 };
 
-export const createCampaign = async (campaign) => {
-  const { title, description, startDate, endDate, donation_goal, image } =
-    campaign;
+export const findCampaignByName = async (name) => {
+  const query = "SELECT * FROM campaigns WHERE name = ?";
+  const params = [name];
+  return await executeQuery(query, params);
+};
 
-  if (!title || !description || !startDate || !endDate || !goal || !image) {
+export const createCampaign = async (campaign) => {
+  const { title, content, startDate, endDate, donation_goal, image } = campaign;
+
+  if (
+    !title ||
+    !content ||
+    !startDate ||
+    !endDate ||
+    !donation_goal ||
+    !image
+  ) {
     throw new Error("All fields are required");
   }
 
   const image_url = await saveFile(image);
   const query =
-    "INSERT INTO campaigns (title, content, donation_goal, image_url, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
+    "INSERT INTO campaigns (title, content, donation_goal, image_url, startDate, endDate) VALUES (?, ?, ?, ?, ?, ?)";
   const params = [
     title,
-    description,
+    content,
     donation_goal,
     image_url,
-    startDate,
-    endDate,
+    formatDate(startDate),
+    formatDate(endDate),
   ];
 
   await executeQuery(query, params);
 };
 
 export const updateCampaign = async (id, campaign) => {
-  const { title, description, startDate, endDate, donation_goal, image } =
-    campaign;
+  const { title, content, startDate, endDate, donation_goal, image } = campaign;
 
   const fieldsToUpdate = {
     ...(title && { title }),
-    ...(description && { description }),
+    ...(content && { content }),
     ...(startDate && { startDate }),
     ...(endDate && { endDate }),
     ...(donation_goal && { donation_goal }),

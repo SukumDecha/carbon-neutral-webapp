@@ -22,7 +22,7 @@ export const createUser = async (user) => {
 
   const query = `
     INSERT INTO users (username, password, email, avatar, points, isAdmin, total_Donation)
-    VALUES (?, ?, ?, ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `;
   const params = [
     username,

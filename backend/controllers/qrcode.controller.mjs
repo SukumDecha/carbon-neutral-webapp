@@ -31,8 +31,6 @@ router.get("/api/uploads/:directoryName/:fileName", async (req, res) => {
 
 router.get("/api/uploads/:directoryName/:fileName", async (req, res) => {
   const { directoryName, fileName } = req.params;
-  console.log("directoryName:", directoryName);
-  console.log("fileName:", fileName);
 
   const publicDir = path.join("public", "uploads");
   const filePath = path.join(publicDir, directoryName, fileName);

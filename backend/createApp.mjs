@@ -14,7 +14,7 @@ export function createApp() {
 
   app.use(
     cors({
-      origin: "http://127.0.0.1:5173",
+      origin: "*",
       credentials: true,
     })
   );
@@ -28,10 +28,12 @@ export function createApp() {
 
   return app;
 }
-
 const createTableIfExist = async () => {
   try {
     const connection = await pool.getConnection();
+
+    await connection.query(`
+    CREATE DATABASE IF NOT EXISTS carbon_neutral_app`);
 
     // Create users table
     await connection.query(`
@@ -106,7 +108,7 @@ const createTableIfExist = async () => {
         image_url VARCHAR(255),
         title TEXT,
         content TEXT,
-        total_donation FLOAT,
+        total_donations FLOAT,
         donation_goal FLOAT
       )
     `);

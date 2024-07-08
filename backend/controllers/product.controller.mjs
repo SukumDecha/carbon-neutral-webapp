@@ -7,16 +7,16 @@ import {
   findAllProducts,
   findProductById,
 } from "../services/product.service.mjs";
-import multer from "multer";
 import { handleErrors } from "../utils/helpers.mjs";
 import { handleGuard } from "./middlewares/jwt.middleware.mjs";
+import multer from "multer";
 
 const router = Router();
 
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, // Limit file size to 5 MB (adjust as needed)
+    fileSize: 5 * 1024 * 1024,
   },
 });
 
@@ -46,19 +46,18 @@ router.get("/api/products/:id", async (req, res) => {
 router.post(
   "/api/products",
   handleGuard,
-  upload.single("file"),
+  upload.single("image"),
   async (req, res) => {
     const productData = {
       name: req.body.name,
       description: req.body.description,
       point_cost: req.body.point_cost,
       quantity: req.body.quantity,
-      imagePath: req.file,
+      image: req.file,
     };
-    await addProduct(productData);
 
     try {
-      await addProduct(req.body);
+      await addProduct(productData);
       res.status(200).json({ message: "Product created successfully" });
     } catch (error) {
       handleErrors(res, error, "Failed to create product");

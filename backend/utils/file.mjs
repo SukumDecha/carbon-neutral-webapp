@@ -24,3 +24,4 @@ export const removeDirFromFile = (path) => {
 
   return rm(dir, { recursive: true, force: true });
 };
+
