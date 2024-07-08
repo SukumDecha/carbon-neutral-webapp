@@ -14,13 +14,13 @@ export const findProductById = async (id) => {
 };
 
 export const addProduct = async (product) => {
-  const { name, description, image, point_cost, quantity } = product;
+  const { name, description, imagePath, point_cost, quantity } = product;
 
-  if (!name || !description || !image || !point_cost || !quantity) {
+  if (!name || !description || !imagePath || !point_cost || !quantity) {
     throw new Error("Missing required fields for product");
   }
 
-  const image_url = await saveFile(image);
+  const image_url = await saveFile(imagePath);
 
   const query =
     "INSERT INTO products (name, description, image_url, point_cost, quantity) VALUES (?, ?, ?, ?, ?)";

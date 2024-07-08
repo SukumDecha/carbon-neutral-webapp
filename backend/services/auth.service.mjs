@@ -39,7 +39,7 @@ export const login = async (req, res) => {
 export const register = async (user) => {
   const existingUser = await findUserByEmail(user.email);
 
-  if (existingUser.length !== 0) {
+  if (existingUser) {
     throw new Error("User already exists");
   }
 

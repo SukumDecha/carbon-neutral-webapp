@@ -23,6 +23,8 @@ import "./styles/scss/components/index.scss";
 import CampaignDetails from "./features/campaign/components/CampaignDetails";
 import DonateScreen from "./features/donate/components/DonateItem";
 import CartScreen from "./screens/CartScreen";
+import { HistoryScreen } from "./screens/HistoryScreen";
+import { StatisticScreen } from "./screens/StatisticScreen";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +83,14 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <CartScreen/>,
+      },
+      {
+        path:"/history",
+        element: <HistoryScreen/>
+      },
+      {
+        path:"/static",
+        element:<StatisticScreen/>
       },
       {
         path: "*",

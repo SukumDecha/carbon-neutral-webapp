@@ -18,11 +18,12 @@ export const findUserByEmail = async (email) => {
 export const createUser = async (user) => {
   const { email, username, password, avatar } = user;
 
-  const hashedPassword = hashPassword(password);
+  // Ensure the password is hashed correctly
+  const hashedPassword = await hashPassword(password);
 
   const query = `
-    INSERT INTO users (username, password, email, avatar, points, isAdmin, total_Donation)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO users (username, password, email, avatar, points, isAdmin, total_donations)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `;
   const params = [
     username,
@@ -34,8 +35,15 @@ export const createUser = async (user) => {
     0,
   ];
 
-  await executeQuery(query, params);
+  try {
+    await executeQuery(query, params);
+    console.log("User created successfully");
+  } catch (error) {
+    console.error("Error creating user:", error.message);
+    throw error; // Rethrow the error after logging it
+  }
 };
+
 
 export const updateUser = async (id, user) => {
   const { username, email, avatar, password } = user;
@@ -44,7 +52,7 @@ export const updateUser = async (id, user) => {
     ...(username && { username }),
     ...(email && { email }),
     ...(avatar && { avatar }),
-    ...(password && { password: hashPassword(password) }),
+    ...(password && { password: await hashPassword(password) }),
   };
 
   if (Object.keys(fieldsToUpdate).length === 0) {
