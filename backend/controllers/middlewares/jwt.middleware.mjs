@@ -1,13 +1,12 @@
 import jwt from "jsonwebtoken";
 
 export const handleGuard = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  const token = req.cookies.accessToken
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.sendStatus(401);
+
+  if(!token) {
+    return res.redirect("http://localhost:5173/auth/login")
   }
-
-  const token = authHeader.split(" ")[1];
   jwt.verify(token, process.env.SECRET_TOKEN, (error, decoded) => {
     if (error) {
       res.clearCookie("accessToken");
@@ -15,7 +14,6 @@ export const handleGuard = (req, res, next) => {
     }
 
     req.user = decoded.user;
-    console.log("Authenticated user:", req.user);
     next();
   });
 };

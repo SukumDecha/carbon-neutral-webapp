@@ -1,0 +1,169 @@
+.StatisticScreen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: #F9EEDA;
+
+    .-flex {    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .Donation{
+        margin-top: 4%;
+        width: 320px;
+        height: fit-content;
+        padding: 4px 15px;
+        gap: 10px;
+        flex-shrink: 0;
+        border-radius: 24px;
+        background: #E2B363;
+        box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        h1{
+            color: var(#000);
+            text-align: center;
+            font-family: Manrope;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 480;
+            text-align: left;
+        }
+        p{
+            color: var(#000);
+            text-align: center;
+            font-family: Manrope;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 480;
+            text-align: left;
+        }
+      
+        
+    }
+    .-donation-flex{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .CoralsDonated{
+        display: flex;
+        justify-content: space-between;
+    }
+    .FoodDonated{
+        display: flex;
+        justify-content: space-between;
+    }
+    .TotalDonated{
+        display: flex;
+        justify-content: space-between;
+    }
+    .PointsHistory{
+        margin-top: 4%;
+        width: 320px;
+        height: fit-content;
+        padding: 0px 15px;
+        flex-shrink: 0;
+        background-color: #E2B363;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        border-radius: 24px;
+        gap: 10px;
+        h1{
+            color: var(#000);
+            text-align: center;
+            font-family: Manrope;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 480;
+            text-align: left;
+        }
+        p{
+            color: var(#000);
+            text-align: center;
+            font-family: Manrope;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 480;
+            text-align: left;
+        }
+        svg{
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .FirstHistory{
+        display: flex;
+        justify-content: space-between;
+    }
+    .SecondHistory{
+        display: flex;
+        justify-content: space-between;
+    }
+    .ThirdHistory{
+        display: flex;
+        justify-content: space-between;
+    }
+    .Line{
+        width: 320px;
+        height: 1px;
+        background: #000;
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.30);
+    }
+    .Logo{
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        text-align: center;
+        height: 40px;
+    }
+    .Karma{
+        margin-top: 4%;
+        width: 320px;
+        height: fit-content;
+        padding: 0px 15px;
+        flex-shrink: 0;
+        margin-bottom: 20%;
+        background-color: #E2B363;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        border-radius: 24px;
+        gap: 10px;
+        h1{
+            color: var(#000);
+            text-align: center;
+            font-family: Manrope;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 480;
+            text-align: left;
+        }
+        p{
+            color: var(#000);
+            text-align: center;
+            font-family: Manrope;
+            font-size: 16px;
+            font-style: normal;
+                
+            text-align: left;
+        }
+
+    }
+    .GoodKarma{
+        display: flex;
+        justify-content: space-between;
+    }
+    .BadKarma{
+        display: flex;
+        justify-content: space-between;
+    }
+    .--flex{
+        padding-top: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+    }
+}

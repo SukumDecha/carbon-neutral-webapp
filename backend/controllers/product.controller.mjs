@@ -16,7 +16,7 @@ const router = Router();
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, // Limit file size to 5 MB (adjust as needed)
+    fileSize: 5 * 1024 * 1024, 
   },
 });
 
@@ -46,18 +46,18 @@ router.get("/api/products/:id", async (req, res) => {
 router.post(
   "/api/products",
   handleGuard,
-  upload.single("file"),
+  upload.single("image"), // Ensure the form uses 'file' as the field name
   async (req, res) => {
     const productData = {
       name: req.body.name,
       description: req.body.description,
       point_cost: req.body.point_cost,
       quantity: req.body.quantity,
-      imagePath: req.file,
+      imagePath: req.file, // Updated to match the field name used by Multer
     };
 
     try {
-      await addProduct(req.body);
+      await addProduct(productData);
       res.status(200).json({ message: "Product created successfully" });
     } catch (error) {
       handleErrors(res, error, "Failed to create product");
@@ -66,11 +66,16 @@ router.post(
 );
 
 // Update Product
-router.patch("/api/products/:id", handleGuard, async (req, res) => {
+router.patch("/api/products/:id", handleGuard,  upload.single("image"), async (req, res) => {
+
   const { id } = req.params;
 
+  const updatedProduct = {
+    ...req.body, imagePath: req.file
+  }
+
   try {
-    await updateProduct(id, req.body);
+    await updateProduct(id, updatedProduct);
     res.status(200).json({ message: "Product updated successfully" });
   } catch (error) {
     handleErrors(res, error, "Failed to update product");

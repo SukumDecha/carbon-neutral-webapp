@@ -26,6 +26,8 @@ import EditCampaignForm from "./features/campaign/components/admin/EditCampaignF
 import EditBlogForm from "./features/blog/components/admin/EditBlogForm";
 import EditProductForm from "./features/product/components/admin/EditProductForm";
 import ProductDetails from "./features/product/components/ProductDetails";
+import { HistoryScreen } from "./screens/HistoryScreen";
+import { StatisticScreen } from "./screens/StatisticScreen";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <UserProfile />,
+      },
+      {
+        path: "/profile/history",
+        element: <HistoryScreen/>
+      },
+      {
+        path: "/profile/statistic",
+        element: <StatisticScreen/>
       },
       {
         path: "/tracker",

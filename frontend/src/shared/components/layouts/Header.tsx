@@ -28,6 +28,9 @@ export const HeaderSetting = () => {
     } else if (pathname === "/cart") {
       setNamepath("Cart");
       setActive(false);
+    } else if (pathname === "/history"){
+      setNamepath("Purchaase History");
+
     }
   }, [pathname]);
 
