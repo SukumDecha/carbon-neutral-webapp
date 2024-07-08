@@ -86,7 +86,7 @@ const LoginModal = () => {
         </form>
 
         <div className="-footer">
-          <p>Don't have an account?</p>
+          <p>Don't have an acco  unt?</p>
 
           <Button
             htmlType="submit"
