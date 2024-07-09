@@ -70,7 +70,7 @@ router.get("/api/campaigns/:name", async (req, res) => {
 //Api when we scan only
 router.patch(
   "/api/campaigns/:id",
-  handleGuard,
+  // handleGuard,
   upload.single("image"),
   async (req, res) => {
     const updatedCampaign = {
@@ -91,7 +91,7 @@ router.patch(
 
 router.post(
   "/api/campaigns",
-  handleGuard,
+  // handleGuard,
   upload.single("image"),
   async (req, res) => {
     const createdCampaign = {

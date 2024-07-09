@@ -7,17 +7,28 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../Button";
+import { useUser } from "../../../features/user/hooks/useUser";
+import { Avatar } from "antd";
+import { getImagePath } from "../../utils/helper.utils";
 
-const Header = () => (
-  <div className="header">
-    <Link to="/profile">
-      <div className="-icon">
-        <CircleUserRound />
-      </div>
-    </Link>
-    <Button>0 POINT</Button>
-  </div>
-);
+const Header = () => {
+  const { data: user } = useUser();
+
+  return (
+    <div className="header">
+      <Link to="/profile">
+        <div className="-icon">
+          {user && user.avatar ? (
+            <Avatar src={getImagePath(user.avatar)} />
+          ) : (
+            <CircleUserRound />
+          )}
+        </div>
+      </Link>
+      <Button>0 POINT</Button>
+    </div>
+  );
+};
 
 export const HeaderSetting = () => {
   const { pathname } = useLocation();

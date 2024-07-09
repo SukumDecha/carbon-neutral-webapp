@@ -45,7 +45,7 @@ router.get("/api/products/:id", async (req, res) => {
 // Add Product
 router.post(
   "/api/products",
-  handleGuard,
+  // handleGuard,
   upload.single("image"),
   async (req, res) => {
     const productData = {
@@ -68,7 +68,7 @@ router.post(
 // Update Product
 router.patch(
   "/api/products/:id",
-  handleGuard,
+  // handleGuard,
   upload.single("image"),
   async (req, res) => {
     const { id } = req.params;

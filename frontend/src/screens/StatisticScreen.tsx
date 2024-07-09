@@ -1,16 +1,57 @@
 import {
   ArrowBigDown,
   ArrowBigUp,
-  ChevronDown,
+  DollarSign,
   Fish,
   HandCoins,
-  History,
   PiggyBank,
   TreePine,
   Utensils,
 } from "lucide-react";
+import { useDonationHistory } from "../features/user/hooks/useUser";
+import Loading from "../shared/components/Loading";
+import EmptyBox from "../shared/components/EmptyBox";
+
+const getIcon = (campaign: string) => {
+  if (campaign.startsWith("tree")) return <TreePine />;
+  if (campaign.startsWith("coral")) return <Fish />;
+  if (campaign === "food") return <Utensils />;
+  return <DollarSign />;
+};
+
+const getUnit = (campaign: string) => {
+  if (campaign.startsWith("tree") || campaign.startsWith("coral"))
+    return "Planted";
+  if (campaign === "food") return "Researched";
+  return "Donated";
+};
 
 export const StatisticScreen = () => {
+  const { data: statistic, isLoading } = useDonationHistory();
+
+  if (isLoading) return <Loading />;
+
+  if (!statistic) return <EmptyBox />;
+
+  const totalDonated = statistic.reduce(
+    (acc, item) => acc + Number(item.total),
+    0
+  );
+
+  const renderStatistic = statistic.map((item) => {
+    return (
+      <div className="-donation-flex">
+        <p>
+          {item.title} {getUnit(item.title)}
+        </p>
+        <div className="-flex">
+          {item.total}
+          {getIcon(item.title)}
+        </div>
+      </div>
+    );
+  });
+
   return (
     <div className="StatisticScreen">
       <div className="Donation">
@@ -20,67 +61,18 @@ export const StatisticScreen = () => {
         </div>
         <div className="Line"></div>
         <div className="DonationInformation">
-          <div className="-donation-flex">
-            <p>Trees Planted</p>
-            <div className="-flex">
-              <p>99,999 </p>
-              <TreePine />
-            </div>
-          </div>
-          <div className="-donation-flex">
-            <p>Corals Planted </p>
-            <div className="-flex">
-              <p>4,250 </p>
-              <Fish />
-            </div>
-          </div>
-          <div className="-donation-flex">
-            <p>Food Researched </p>
-            <div className="-flex">
-              <p>100</p>
-              <Utensils />
-            </div>
-          </div>
+          {renderStatistic}
           <div className="Line"></div>
           <div className="-donation-flex">
             <p>Total</p>
             <div className="-flex">
-              <p>104,393</p>
+              <p>{totalDonated}</p>
               <PiggyBank />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="PointsHistory">
-        <div className="-flex">
-          <div className="-flex">
-            <h1>Points History</h1>
-            <History />
-          </div>
-        </div>
-
-        <div className="Line"></div>
-        <div className="PointsHistoryInformation">
-          <div className="FirstHistory">
-            <p>Redeem a shirt</p>
-            <p>-100 Points</p>
-          </div>
-          <div className="SecondHistory">
-            <p>Redeem a plushie</p>
-            <p>-100 Points</p>
-          </div>
-          <div className="ThirdHistory">
-            <p>Won an ideation event</p>
-            <p>+300 Points</p>
-          </div>
-          <div className="Line"></div>
-
-          <div className="--flex">
-            <ChevronDown />
-          </div>
-        </div>
-      </div>
       <div className="Karma">
         <div className="-flex">
           <h1>Karma</h1>

@@ -7,7 +7,6 @@ import Layout from "./shared/components/layouts/Layout";
 import AuthScreen from "./screens/AuthScreen";
 import AuthLayout from "./shared/components/layouts/AuthLayout";
 import TrackerScreen from "./screens/TrackerScreen";
-import CampaignScreen from "./screens/CampaignScreen";
 
 import AdminScreen from "./screens/admin/AdminScreen";
 import ClientProviders from "./shared/components/providers/ClientProviders";
@@ -28,8 +27,8 @@ import EditProductForm from "./features/product/components/admin/EditProductForm
 import ProductDetails from "./features/product/components/ProductDetails";
 import { HistoryScreen } from "./screens/HistoryScreen";
 import { StatisticScreen } from "./screens/StatisticScreen";
-import { EditProfile } from "./features/user/components/EditProfile";
 import { UserProfile } from "./features/user/components/UserProfile";
+import EditProfile from "./features/user/components/EditProfile";
 
 const router = createBrowserRouter([
   {

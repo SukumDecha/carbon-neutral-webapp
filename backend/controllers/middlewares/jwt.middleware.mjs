@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const handleGuard = (req, res, next) => {
   const token = req.cookies.accessToken;
-
+  
   if (!token) {
     return res.redirect("http://localhost:5173/auth/login");
   }

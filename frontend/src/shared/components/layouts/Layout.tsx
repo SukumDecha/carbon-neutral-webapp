@@ -5,7 +5,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
   const { pathname } = useLocation();
-
+  
   const renderHeader = () => {
     if (pathname === "/profile") {
       return null;

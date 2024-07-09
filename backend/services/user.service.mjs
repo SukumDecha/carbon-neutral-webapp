@@ -1,3 +1,4 @@
+import { removeDirFromFile, saveFile } from "../utils/file.mjs";
 import { hashPassword, executeQuery } from "../utils/helpers.mjs";
 
 export const findUserById = async (id) => {
@@ -71,14 +72,25 @@ export const getDonationHistory = async (userId) => {
 };
 
 export const updateUser = async (id, user) => {
-  const { username, email, avatar, password } = user;
+  const { username, email, image, password } = user;
 
   const fieldsToUpdate = {
     ...(username && { username }),
     ...(email && { email }),
-    ...(avatar && { avatar }),
     ...(password && { password: await hashPassword(password) }),
   };
+
+  if (image) {
+    const user = await findUserById(id);
+
+    try {
+      removeDirFromFile(user.avatar);
+    } catch (err) {
+      console.log("Could not remove file");
+    }
+
+    fieldsToUpdate.avatar = await saveFile(image);
+  }
 
   if (Object.keys(fieldsToUpdate).length === 0) {
     throw new Error("No fields provided for update");
@@ -95,7 +107,7 @@ export const updateUser = async (id, user) => {
     WHERE id = ?
   `;
 
-  await executeQuery(query, params);
+  return await executeQuery(query, params);
 };
 
 export const addTotalDonation = async (userId, amount) => {

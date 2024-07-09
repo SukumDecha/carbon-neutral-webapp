@@ -7,6 +7,13 @@ export type IUser = {
   isAdmin: number;
 };
 
+export type IUpdateUser = Partial<IUser> & {
+  password?: string;
+  avatar?: {
+    fileList: { originFileObj: File }[];
+  };
+};
+
 export type IClaimHistory = {
   id: number;
   name: string;
