@@ -26,6 +26,20 @@ const RegisterModal = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (
+      formData.username === "" ||
+      formData.email === "" ||
+      formData.password === ""
+    ) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    if (formData.email.indexOf("@") === -1) {
+      toast.error("Invalid email");
+      return;
+    }
+
     const res = await fetch("http://localhost:3000/api/auth/register", {
       method: "POST",
       headers: {
@@ -88,7 +102,7 @@ const RegisterModal = () => {
             }}
           ></input>
 
-          <Button htmlType="submit">
+          <Button htmlType="submit" type="secondary">
             Register
             <div className="-icon">
               <ArrowRight />
@@ -99,7 +113,7 @@ const RegisterModal = () => {
         <div className="-footer">
           <p>Already have an account?</p>
 
-          <Button htmlType="submit" type="secondary" onClick={redirectToLogin}>
+          <Button htmlType="submit" onClick={redirectToLogin}>
             Sign-in
             <div className="-icon">
               <ArrowRight />

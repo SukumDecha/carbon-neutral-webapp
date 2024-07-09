@@ -1,5 +1,5 @@
 import { executeQuery, formatDate } from "../utils/helpers.mjs";
-import { addTotalDonation } from "./user.service.mjs";
+import { addTotalDonation, updateUserPoints } from "./user.service.mjs";
 import { removeDirFromFile, saveFile } from "../utils/file.mjs";
 
 export const findAllCampaigns = async () => {
@@ -57,6 +57,7 @@ export const updateCampaign = async (id, campaign) => {
     ...(startDate && { startDate: formatDate(startDate) }),
     ...(endDate && { endDate: formatDate(endDate) }),
     ...(donation_goal && { donation_goal }),
+    total_donations: 0,
   };
 
   if (Object.keys(fieldsToUpdate).length === 0) {
@@ -73,7 +74,9 @@ export const updateCampaign = async (id, campaign) => {
   const setClause = Object.keys(fieldsToUpdate)
     .map((field) => `${field} = ?`)
     .join(", ");
+
   const params = [...Object.values(fieldsToUpdate), id];
+
   const query = `UPDATE campaigns SET ${setClause} WHERE id = ?`;
 
   await executeQuery(query, params);
@@ -97,9 +100,16 @@ export const getTotalDonations = async (id) => {
 };
 
 export const getTopDonors = async (id, limit) => {
-  const query =
-    "SELECT u.name, u.avatar SUM(amount) AS total FROM donations d JOIN user u ON u.id = d.user_id WHERE campaign_id = ? GROUP BY user_id ORDER BY total DESC LIMIT ?";
-  const params = [id, limit];
+  const query = `
+    SELECT u.username, u.avatar, SUM(amount) AS total 
+    FROM donations d 
+    JOIN users u ON u.id = d.user_id 
+    WHERE campaign_id = ? 
+    GROUP BY user_id 
+    ORDER BY total DESC 
+    LIMIT ?
+  `;
+  const params = [id, 10];
   return await executeQuery(query, params, false);
 };
 

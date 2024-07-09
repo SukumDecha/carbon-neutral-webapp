@@ -11,7 +11,7 @@ router.post("/api/auth/register", async (request, response) => {
     await register(request.body);
     return response.sendStatus(201);
   } catch (error) {
-    return response.status(400).send(error.message);
+    return response.status(400).json({ error: error.message });
   }
 });
 

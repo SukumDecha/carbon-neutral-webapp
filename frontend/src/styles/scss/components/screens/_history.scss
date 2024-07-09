@@ -5,22 +5,59 @@
     flex-direction: column;
     align-items: center;
 
-    .-item{
+    .-item {
         display: flex;
-        width: 95%;
-        height: 8em;
-        padding: 20px 3px 20px 6px;
-        margin-top: 5%;
-        box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.30);
-        flex-shrink: 0;
-        background-color: wheat;
-        justify-content: space-between;
         align-items: center;
+        gap: 8px;
+        width: 95%;
+        height: 150px;
+        padding: 20px 3px 20px 6px;
+        margin-top: 16px;
+        box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.30);
+        background-color: wheat;
+
+        @media screen and (min-width: $breakpoint-md) {
+            height: 150px;
+            justify-content: space-between;
+
+        }
+
+        p {
+            width: 130px;
+
+            &.-bold {
+                font-weight: bold;
+            }
+
+            &.-productName {
+                width: auto;
+            }
+        }
+
+    }
+
+    .-flex {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .-col {
+        display: flex;
+        flex-direction: column;
+
+        &.-right {
+            align-items: end;
+
+            p {
+                text-align: end;
+            }
+        }
     }
     
     .-image {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
 
         img {
             width: 100%;
@@ -30,16 +67,17 @@
     }
 
     .-info {
-        margin-left: 18px;
+        margin-left: 6px;
         display: flex;
-        width: 170px;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: -7%;
-        p{
-            margin: 3%;
+        justify-content: space-evenly;
+
+        @media screen and (min-width: 414px){
+            width: 50%;  
         }
+        
+
     }
+
     .-button {
         display: flex;
         flex-direction: column;
@@ -64,6 +102,13 @@
                 font-weight: 600;
                 line-height: 20px; /* 142.857% */
         }
+    }
 
+    span {
+        font-size: 10px;
+    }
+
+    button {
+        padding: .5rem;;
     }
 }

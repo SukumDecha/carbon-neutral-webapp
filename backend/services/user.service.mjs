@@ -16,24 +16,16 @@ export const findUserByEmail = async (email) => {
 };
 
 export const createUser = async (user) => {
-  const { email, username, password, avatar } = user;
+  const { email, username, password } = user;
 
   // Ensure the password is hashed correctly
   const hashedPassword = await hashPassword(password);
 
   const query = `
-    INSERT INTO users (username, password, email, avatar, points, isAdmin, total_Donation)
+    INSERT INTO users (username, password, email, points, isAdmin, total_Donations)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
-  const params = [
-    username,
-    hashedPassword,
-    email,
-    avatar || "/public/uploads/default-avatar.png",
-    0,
-    0,
-    0,
-  ];
+  const params = [username, hashedPassword, email, 0, 0, 0];
 
   try {
     await executeQuery(query, params);
@@ -44,15 +36,35 @@ export const createUser = async (user) => {
   }
 };
 
-export const getClaimHistory = async (user) => {
-  const userId = user.id;
-
+export const getClaimHistory = async (userId) => {
   const query = `
-    SELECT c.id, c.claimAt, p.name, c.quantity
-    FROM claim_product_history c
-    JOIN products p ON c.product_Id = p.id
-    JOIN users u ON c.user_Id = u.id
-    WHERE c.user_Id = ?
+    SELECT 
+    c.id, 
+    c.claimAt, 
+    p.name, 
+    p.*,
+    (c.quantity * p.point_cost) AS total_points,
+    c.quantity as quantity
+FROM 
+    claim_product_history c
+JOIN 
+    products p ON c.product_Id = p.id
+JOIN 
+    users u ON c.user_Id = u.id
+WHERE 
+    c.user_Id = ?
+  `;
+
+  return await executeQuery(query, [userId], false, false);
+};
+
+export const getDonationHistory = async (userId) => {
+  const query = `
+  SELECT c.title, SUM(d.amount) as total FROM donations d 
+  JOIN users u ON d.user_id = u.id
+  JOIN campaigns c ON d.campaign_id = c.id 
+  WHERE u.id = ?
+  GROUP BY c.title
   `;
 
   return await executeQuery(query, [userId], false);

@@ -21,15 +21,8 @@ const itemsSlice = createSlice({
       state.carts = state.carts.filter((item) => item.id !== action.payload);
     },
 
-    updateCart(
-      state,
-      action: PayloadAction<{ id: string; updatedItem: Partial<ICart> }>
-    ) {
-      const { id, updatedItem } = action.payload;
-      const existingItem = state.carts.find((item) => item.id === id);
-      if (existingItem) {
-        Object.assign(existingItem, updatedItem);
-      }
+    setCart(state, action: PayloadAction<ICart[]>) {
+      state.carts = action.payload;
     },
     updateCartQuantity(
       state,
@@ -44,6 +37,6 @@ const itemsSlice = createSlice({
   },
 });
 
-export const { addCart, removeCart, updateCart, updateCartQuantity } =
+export const { addCart, removeCart, setCart, updateCartQuantity } =
   itemsSlice.actions;
 export default itemsSlice.reducer;

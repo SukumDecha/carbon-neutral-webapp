@@ -3,7 +3,7 @@ import {
   generateRandomNumber,
   getImagePath,
 } from "../../../shared/utils/helper.utils";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useProductById } from "../hooks/useProduct";
 import Loading from "../../../shared/components/Loading";
 import EmptyBox from "../../../shared/components/EmptyBox";
@@ -80,10 +80,12 @@ const ProductDetails = () => {
         </div>
 
         <div className="-wrap">
-          <div className="-col">
-            <ShoppingCart />
-            <p>Exchange</p>
-          </div>
+          <Link to="/cart">
+            <div className="-col">
+              <ShoppingCart />
+              <p>Exchange</p>
+            </div>
+          </Link>
         </div>
       </div>
     </>

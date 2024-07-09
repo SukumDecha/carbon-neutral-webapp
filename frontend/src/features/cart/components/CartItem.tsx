@@ -4,7 +4,7 @@ import { ICart } from "../cart.type";
 import { updateCartQuantity, removeCart } from "../../../stores/cartSlicer";
 
 import { useClaimProduct } from "../../product/hooks/useProduct";
-import toast from "react-hot-toast";
+
 import { Button } from "antd";
 
 interface IProps {
@@ -29,16 +29,8 @@ const CartItem = ({ cart }: IProps) => {
   };
 
   const handleRedeem = async () => {
-    try {
-      await mutateAsync({ id: cart.product.id, quantity: cart.quantity });
-      handleRemove();
-
-      toast.success("Product redeemed successfully");
-    } catch (error) {
-      console.error(error);
-
-      toast.error("Failed to redeem product");
-    }
+    await mutateAsync({ id: cart.product.id, quantity: cart.quantity });
+    handleRemove();
   };
 
   const handleRemove = () => {

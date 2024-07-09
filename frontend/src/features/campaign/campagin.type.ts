@@ -4,14 +4,14 @@ export type ICampaign = {
   content: string;
   image_url: string;
   donation_goal: string;
-  total_donation: string;
+  total_donations: string;
   startDate: string;
   endDate: string;
 };
 
 export type IAddCampaign = Omit<
   ICampaign,
-  "id" | "total_donation" | "startDate" | "endDate"
+  "id" | "total_donations" | "startDate" | "endDate"
 > & {
   dateRange?: [Date, Date];
   startDate: string;
@@ -29,7 +29,7 @@ export type IUpdateCampaign = Partial<IAddCampaign> & {
 };
 
 export type IDonor = {
-  name: string;
-  img: string;
-  amount: number;
+  username: string;
+  avatar: string;
+  total: number;
 };

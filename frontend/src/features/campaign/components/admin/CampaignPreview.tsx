@@ -31,7 +31,7 @@ const CampaignPreview = ({ campaign }: IProps) => {
       <div className="-title">
         <p>{title}</p>
         <Tag color="purple">
-          Total Donation: {campaign.total_donation} / {campaign.donation_goal}
+          Total Donation: {campaign.total_donations} / {campaign.donation_goal}
         </Tag>
       </div>
     );

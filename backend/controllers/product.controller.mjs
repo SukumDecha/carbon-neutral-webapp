@@ -109,7 +109,7 @@ router.put("/api/sell/:id", handleGuard, async (req, res) => {
     await sellProduct(productId, quantity, userId);
     res.status(200).json({ message: "Product sold successfully" });
   } catch (error) {
-    handleErrors(res, error, "Failed to sell product");
+    handleErrors(res, error, error.message);
   }
 });
 

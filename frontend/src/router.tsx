@@ -65,10 +65,6 @@ const router = createBrowserRouter([
         element: <TrackerScreen />,
       },
       {
-        path: "/campaign",
-        element: <CampaignScreen />,
-      },
-      {
         path: "/campaign/:name",
         element: <CampaignDetails />,
       },

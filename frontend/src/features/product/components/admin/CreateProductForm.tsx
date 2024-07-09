@@ -56,7 +56,7 @@ const CreateProductForm = () => {
         <p>Fill the form to add new product for exchanges</p>
         <div className="-image">
           <img
-            src={image || "/assets/no-image.png"}
+            src={image || "/public/no-image.png"}
             alt="adding-item"
             width={250}
             height={250}

@@ -9,6 +9,7 @@ import { useProduct } from "../features/product/hooks/useProduct";
 import Loading from "../shared/components/Loading";
 import EmptyBox from "../shared/components/EmptyBox";
 import { getImagePath } from "../shared/utils/helper.utils";
+import Button from "../shared/components/Button";
 
 const linkTo = [
   {
@@ -67,16 +68,20 @@ const HomeScreen = () => {
         </div>
       </div>
       <div className="-product-list">
-        {products.map((product) => (
-          <div className="-item" key={product.id}>
-            <img src={getImagePath(product.image_url)} alt={product.name} />
-            <p>{product.name}</p>
-            <p>{product.point_cost} Point</p>
-            <Link to={`/product/${product.id}`}>
-              <button>View </button>
-            </Link>
-          </div>
-        ))}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div className="-item" key={product.id}>
+              <img src={getImagePath(product.image_url)} alt={product.name} />
+              <p>{product.name}</p>
+              <p>{product.point_cost} Point</p>
+              <Link to={`/product/${product.id}`}>
+                <Button>View</Button>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <EmptyBox />
+        )}
       </div>
     </div>
   );

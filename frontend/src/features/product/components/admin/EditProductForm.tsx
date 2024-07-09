@@ -50,7 +50,6 @@ const EditProductForm = () => {
   const handleSubmit = async (data: IUpdateProduct) => {
     try {
       await mutateAsync(data);
-      // window.location.reload();
 
       toast.success("Product updated successfully");
     } catch (error) {
@@ -87,7 +86,7 @@ const EditProductForm = () => {
         <h1>Edit Product Form</h1>
         <div className="-image">
           <img
-            src={image || "/assets/no-image.png"}
+            src={image || "/public/no-image.png"}
             alt="adding-item"
             width={250}
             height={250}
@@ -154,7 +153,7 @@ const EditProductForm = () => {
         </Form.Item>
         <Form.Item>
           <Button type="secondary" htmlType="submit">
-            Add new product
+            Edit
           </Button>
         </Form.Item>
       </Form>

@@ -6,6 +6,24 @@ import { Outlet, useLocation } from "react-router-dom";
 const Layout = () => {
   const { pathname } = useLocation();
 
+  const renderHeader = () => {
+    if (pathname === "/profile") {
+      return null;
+    } else if (
+      pathname === "/cart" ||
+      pathname.startsWith("/product") ||
+      pathname === "/history" ||
+      pathname.startsWith("/blogs") ||
+      pathname.endsWith("/statistic") ||
+      pathname === "/exchange" ||
+      pathname === "/tracker"
+    ) {
+      return <HeaderSetting />;
+    } else {
+      return <Header />;
+    }
+  };
+
   return (
     <div
       style={{
@@ -13,17 +31,10 @@ const Layout = () => {
         position: "relative",
       }}
     >
-      {pathname === "/profile" || pathname === "/personal" ? (
-        <></>
-      ) : pathname === "/personal" || pathname === "/cart" ? (
-        <HeaderSetting />
-      ) : (
-        <Header />
-      )}
-
+      {renderHeader()}
       <div
         style={{
-          margin: "0 auto",
+          margin: "auto auto",
           paddingBottom: "64px",
           zIndex: 0,
         }}

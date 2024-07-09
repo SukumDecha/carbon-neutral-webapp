@@ -9,8 +9,10 @@ const Loading = () => {
   };
   return (
     <div className="loading" style={styles}>
-      <Spin />
-      <h1>Loading...</h1>
+      <div className="-wrap">
+        <Spin />
+        <h1>Loading...</h1>
+      </div>
     </div>
   );
 };

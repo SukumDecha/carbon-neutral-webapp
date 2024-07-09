@@ -14,13 +14,13 @@ export const findProductById = async (id) => {
 };
 
 export const addProduct = async (product) => {
-  const { name, description, imagePath, point_cost, quantity } = product;
+  const { name, description, image, point_cost, quantity } = product;
 
-  if (!name || !description || !imagePath || !point_cost || !quantity) {
+  if (!name || !description || !image || !point_cost || !quantity) {
     throw new Error("Missing required fields for product");
   }
 
-  const image_url = await saveFile(imagePath);
+  const image_url = await saveFile(image);
 
   const query =
     "INSERT INTO products (name, description, image_url, point_cost, quantity) VALUES (?, ?, ?, ?, ?)";
@@ -29,7 +29,6 @@ export const addProduct = async (product) => {
 };
 
 export const updateProduct = async (id, product) => {
-  console.log(product);
   const { name, description, imagePath, point_cost, quantity } = product;
 
   const fieldsToUpdate = {
@@ -94,7 +93,7 @@ export const sellProduct = async (productId, quantity, userId) => {
   }
 
   if (user.points < totalPoints) {
-    throw new Error("User doesn't enough points to buy");
+    throw new Error("You don't have enough points to buy");
   }
 
   const query =

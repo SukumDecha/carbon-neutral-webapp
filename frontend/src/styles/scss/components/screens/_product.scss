@@ -10,9 +10,21 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+
+    @media screen and (min-width: $breakpoint-md) {
+        width: 70%;
+        margin: 24px auto;
+        border-radius: 16px;
+    }
+    
     img {
         width: 100%;
         height: auto;
+
+        @media screen and (min-width: $breakpoint-md) {
+            width: 300px;
+            margin: 0 auto;
+        }
     }
 
     p {
@@ -59,4 +71,6 @@
         height: 5px;
         margin-top: -2%;
     }
+
+   
 }

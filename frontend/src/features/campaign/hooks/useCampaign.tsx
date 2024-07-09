@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   createCampaign,
   deleteCampaign,
+  donateToCampaign,
   findAllCampaigns,
   findCampaignByName,
   findTopDonors,
@@ -24,10 +25,10 @@ export const useCampaignByName = (productId: string) => {
   });
 };
 
-export const useTopDonors = () => {
+export const useTopDonors = (campaignTitle: string) => {
   return useQuery({
     queryKey: ["campaigns", "topDonors"],
-    queryFn: () => findTopDonors(),
+    queryFn: () => findTopDonors(campaignTitle),
     staleTime: 1000 * 60 * 5,
   });
 };
@@ -56,6 +57,20 @@ export const useDeleteCampaign = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: deleteCampaign,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["campaigns"] });
+    },
+  });
+};
+
+export const useDonate = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: {
+      campaignTitle: string;
+      amount: number;
+      userId: number;
+    }) => donateToCampaign(data.campaignTitle, data.amount, data.userId),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["campaigns"] });
     },

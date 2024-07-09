@@ -41,33 +41,36 @@ const AdminScreen = () => {
 
   const renderContainer = () => {
     if (feature === "products") {
+      if (!products || products.length === 0) {
+        return (
+          <EmptyBox>
+            <p>Product is not available for now</p>
+          </EmptyBox>
+        );
+      }
+
       return (
         <div className="-container">
-          {products ? (
-            products.map((product) => (
-              <ProductPreview key={product.id} product={product} />
-            ))
-          ) : (
-            <EmptyBox>
-              <p>Product is empty</p>
-            </EmptyBox>
-          )}
+          {products.map((product) => (
+            <ProductPreview key={product.id} product={product} />
+          ))}
         </div>
       );
     }
 
     if (feature === "campaigns") {
+      if (!campaigns || campaigns.length === 0) {
+        return (
+          <EmptyBox>
+            <p>Campaign is not available for now</p>
+          </EmptyBox>
+        );
+      }
       return (
         <div className="-container">
-          {campaigns ? (
-            campaigns.map((campaign) => (
-              <CampaignPreview key={campaign.id} campaign={campaign} />
-            ))
-          ) : (
-            <EmptyBox>
-              <p>Campaign is not available for now</p>
-            </EmptyBox>
-          )}
+          {campaigns.map((campaign) => (
+            <CampaignPreview key={campaign.id} campaign={campaign} />
+          ))}
         </div>
       );
     }

@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import {
   IAddCampaign,
   ICampaign,
@@ -32,9 +33,9 @@ export const findCampaignByName = async (campaignName: string) => {
   return (await res.json()) as ICampaign;
 };
 
-export const findTopDonors = async () => {
+export const findTopDonors = async (title: string) => {
   const res = await fetch(
-    `http://localhost:3000/api/campaigns?filter=top_donations`,
+    `http://localhost:3000/api/campaigns/${title}?filter=top_donations`,
     {
       method: "GET",
       credentials: "include",
@@ -71,6 +72,7 @@ export const updateCampaign = async (data: IUpdateCampaign) => {
   const formData = new FormData();
   if (data.title) formData.append("title", data.title);
   if (data.content) formData.append("content", data.content);
+  if (data.donation_goal) formData.append("donation_goal", data.donation_goal);
   if (data.startDate) formData.append("startDate", data.startDate);
   if (data.endDate) formData.append("endDate", data.endDate);
   if (data.image?.fileList[0])
@@ -92,4 +94,23 @@ export const deleteCampaign = async (id: number) => {
   });
 
   return { success: res.ok };
+};
+
+export const donateToCampaign = async (
+  campaignTitle: string,
+  amount: number,
+  userId: number
+) => {
+  const res = await fetch(
+    `http://localhost:3000/api/campaigns/${campaignTitle}?filter=donation&amount=${amount}&userId=${userId}`,
+    {
+      method: "GET",
+    }
+  );
+
+  if (res.ok) {
+    toast.success(`You have donated ${amount} to ${campaignTitle}`);
+  } else {
+    toast.error("Failed to donate");
+  }
 };

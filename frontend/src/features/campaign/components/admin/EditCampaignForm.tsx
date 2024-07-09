@@ -62,7 +62,6 @@ const EditCampaignForm = () => {
 
     try {
       await mutateAsync(data);
-      form.resetFields();
 
       toast.success("Campaign has been updated");
     } catch (error) {
@@ -100,7 +99,7 @@ const EditCampaignForm = () => {
         <p>Fill the form to create new campaign to save our world</p>
         <div className="-image">
           <img
-            src={image || "/assets/no-image.png"}
+            src={image || "/public/no-image.png"}
             alt="adding-item"
             width={250}
             height={250}

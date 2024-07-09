@@ -8,6 +8,7 @@ import {
   claimProduct,
 } from "../api";
 import { IUpdateProduct } from "../product.type";
+import toast from "react-hot-toast";
 
 export const useProduct = () => {
   return useQuery({
@@ -64,6 +65,11 @@ export const useClaimProduct = () => {
       await queryClient.invalidateQueries({
         queryKey: ["products", "history"],
       });
+      toast.success("Product redeemed successfully");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error(error.message);
     },
   });
 };

@@ -30,11 +30,31 @@ router.get("/api/campaigns", async (_req, res) => {
 });
 
 router.get("/api/campaigns/:name", async (req, res) => {
-  try {
-    const campaign = await findCampaignByName(req.params.name);
-    res.json(campaign);
-  } catch (error) {
-    handleErrors(res, error, "Error fetching campaign");
+  console.log(req.query);
+  const { filter, amount, userId } = req.query;
+
+  const campaign = await findCampaignByName(req.params.name);
+
+  if (filter === "donation") {
+    try {
+      await addDonation(campaign.id, userId, amount);
+      return res.status(200).json({ message: "Donation added successfully" });
+    } catch (error) {
+      handleErrors(res, error, "Error adding donation");
+    }
+  } else if (filter === "top_donations") {
+    try {
+      const topDonations = await getTopDonors(campaign.id);
+      res.status(200).json(topDonations);
+    } catch (error) {
+      handleErrors(res, error, "Error fetching top donations");
+    }
+  } else {
+    try {
+      res.json(campaign);
+    } catch (error) {
+      handleErrors(res, error, "Error fetching campaign");
+    }
   }
 });
 
@@ -46,43 +66,25 @@ router.get("/api/campaigns/:name", async (req, res) => {
     handleErrors(res, error, "Error fetching campaign");
   }
 });
+
 //Api when we scan only
 router.patch(
   "/api/campaigns/:id",
   handleGuard,
   upload.single("image"),
   async (req, res) => {
-    const userId = req.user.id;
-    const { id: campaignId } = req.params;
+    const updatedCampaign = {
+      ...req.body,
+      image: req.file,
+    };
 
-    const { filter, amount } = req.query;
+    console.log(updatedCampaign);
 
-    if (filter === "donation") {
-      try {
-        await addDonation(campaignId, userId, amount);
-        return res.status(200).json({ message: "Donation added successfully" });
-      } catch (error) {
-        handleErrors(res, error, "Error adding donation");
-      }
-    } else if (filter === "top_donations") {
-      try {
-        const topDonations = await getTopDonors(req.params.id);
-        res.status(200).json(topDonations);
-      } catch (error) {
-        handleErrors(res, error, "Error fetching top donations");
-      }
-    } else {
-      const updatedCampaign = {
-        ...req.body,
-        image: req.file,
-      };
-
-      try {
-        await updateCampaign(req.params.id, updatedCampaign);
-        res.status(200).json({ message: "Campaign updated successfully" });
-      } catch (error) {
-        handleErrors(res, error, "Error updating campaign");
-      }
+    try {
+      await updateCampaign(req.params.id, updatedCampaign);
+      res.status(200).json({ message: "Campaign updated successfully" });
+    } catch (error) {
+      handleErrors(res, error, "Error updating campaign");
     }
   }
 );
@@ -100,7 +102,7 @@ router.post(
       await createCampaign(createdCampaign);
       res.status(201).json({ message: "Campaign created successfully" });
     } catch (error) {
-      handleErrors(error, res, "Error creating campaign");
+      handleErrors(res, error, "Error creating campaign");
     }
   }
 );

@@ -106,7 +106,21 @@ const createTableIfExist = async () => {
         title TEXT,
         content TEXT,
         total_donations FLOAT,
-        donation_goal FLOAT
+        donation_goal FLOAT,
+        startDate DATE,
+        endDate DATE
+      )
+    `);
+
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS donations (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT,
+        campaign_id INT,
+        amount INT,
+        donateAt TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (campaign_id) REFERENCES campaigns(id)
       )
     `);
 

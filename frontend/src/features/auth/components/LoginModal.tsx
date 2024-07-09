@@ -87,7 +87,7 @@ const LoginModal = () => {
             }}
           />
 
-          <Button htmlType="submit">
+          <Button htmlType="submit" type="secondary">
             Login
             <div className="-icon">
               <ArrowRight />
@@ -96,13 +96,9 @@ const LoginModal = () => {
         </form>
 
         <div className="-footer">
-          <p>Don't have an acco unt?</p>
+          <p>Don't have an account?</p>
 
-          <Button
-            htmlType="submit"
-            type="secondary"
-            onClick={redirectToRegister}
-          >
+          <Button htmlType="submit" onClick={redirectToRegister}>
             Sign-Up
             <div className="-icon">
               <ArrowRight />

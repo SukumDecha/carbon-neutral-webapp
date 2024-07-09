@@ -7,11 +7,13 @@ export const login = async (req, res) => {
 
   const user = await findUserByEmail(email);
   if (!user) {
-    return res.status(401).send("Invalid email or password");
+    return res
+      .status(401)
+      .json({ error: "User with this email doest not exist" });
   }
 
   if (!comparePassword(userPass, user.password)) {
-    return res.status(401).send("Invalid email or password");
+    return res.status(401).json({ error: "Invalid email or password" });
   }
 
   const { password, ...userWithoutPassword } = user;
