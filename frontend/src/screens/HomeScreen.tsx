@@ -24,7 +24,7 @@ const linkTo = [
   },
   {
     title: "Event",
-    path: "/event",
+    path: "/blogs",
     img: <CalendarCheck size={32} />,
   },
   {
@@ -34,12 +34,12 @@ const linkTo = [
   },
   {
     title: "Coral",
-    path: "/campaign/coral/coral",
+    path: "/campaign/coral",
     img: <Fish size={32} />,
   },
   {
     title: "Food",
-    path: "/campaign/transportation",
+    path: "/campaign/food",
     img: <Utensils size={32} />,
   },
 ];
@@ -64,7 +64,7 @@ const HomeScreen = () => {
       </div>
       <div className="-boxes">
         <div className="animated-earth">
-          <img src="" alt="Earth" className="rotate" />
+          <img src="earth.jpeg" alt="Earth" className="rotate" />
         </div>
       </div>
       <div className="-product-list">

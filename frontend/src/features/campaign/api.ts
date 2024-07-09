@@ -68,7 +68,6 @@ export const createCampaign = async (data: IAddCampaign) => {
 };
 
 export const updateCampaign = async (data: IUpdateCampaign) => {
-  console.log(data);
   const formData = new FormData();
   if (data.title) formData.append("title", data.title);
   if (data.content) formData.append("content", data.content);

@@ -5,7 +5,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
   const { pathname } = useLocation();
-  
+
   const renderHeader = () => {
     if (pathname === "/profile") {
       return null;
@@ -16,7 +16,8 @@ const Layout = () => {
       pathname.startsWith("/blogs") ||
       pathname.endsWith("/statistic") ||
       pathname === "/exchange" ||
-      pathname === "/tracker"
+      pathname === "/tracker" ||
+      pathname.startsWith("/campaign")
     ) {
       return <HeaderSetting />;
     } else {

@@ -1,5 +1,5 @@
 import Button from "../../../shared/components/Button";
-import { IBlog } from "./Blog.type";
+import { IBlog } from "../blog.type";
 
 interface IProps {
   blogs: IBlog[];

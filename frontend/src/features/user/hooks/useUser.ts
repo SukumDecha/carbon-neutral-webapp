@@ -21,6 +21,18 @@ const fetchUser = async () => {
   return (await res.json()) as IUser;
 };
 
+const fetchUserById = async (id: string) => {
+  const res = await fetch("http://localhost:3000/api/user/" + id, {
+    method: "GET",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch user data");
+  }
+
+  return (await res.json()) as IUser;
+};
+
 const editUser = async (editUser: IUpdateUser) => {
   const formData = new FormData();
   if (editUser.avatar) {
@@ -101,6 +113,14 @@ export const useUser = () => {
   return useQuery({
     queryKey: ["user"],
     queryFn: fetchUser,
+    staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const useUserById = (userId: string) => {
+  return useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => fetchUserById(userId),
     staleTime: 1000 * 60 * 5,
   });
 };

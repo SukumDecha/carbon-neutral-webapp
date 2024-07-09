@@ -32,9 +32,11 @@
     }
     .-avatar {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: #4A3B28;
-        padding-top: 60px;
-        padding-bottom: 90px;
+        padding: 60px 0;
 
         img {
             display: block;
@@ -43,6 +45,14 @@
 
             width: 163px;
             height: 160px;
+        }
+
+        p {
+            color: white;
+            font-family: "Source Sans Pro";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;    
         }
     }
 

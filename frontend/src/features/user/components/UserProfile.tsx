@@ -80,6 +80,7 @@ export const UserProfile = () => {
 
       <div className="-avatar">
         <img src={imgPath} alt="" />
+        <p>{user.username}</p>
       </div>
 
       <div className="-point">

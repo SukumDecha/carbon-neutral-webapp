@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../shared/components/Button";
-import { IBlog } from "../features/blog/components/Blog.type";
+import { IBlog } from "../features/blog/blog.type";
 import { BlogList } from "../features/blog/components/BlogList";
 
 const Blog = [

@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <Link to="/profile">
+      <Link to={user ? "/profile" : "/auth/login"}>
         <div className="-icon">
           {user && user.avatar ? (
             <Avatar src={getImagePath(user.avatar)} />
@@ -83,7 +83,7 @@ export const HeaderSetting = () => {
           break;
         default:
           setNamepath("");
-          setActive(false);
+          setActive(true);
           setActiveshop(false);
           setPathWayback("");
           setPathSetting("");

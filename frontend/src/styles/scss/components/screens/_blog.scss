@@ -88,3 +88,121 @@
         }
     }
 }
+
+.BlogDetails{
+    min-height: 100vh;
+    background: #F9EEDA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: var(--Nigger, #000);
+    font-family: Manrope;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+
+    .BlogInfo{
+        margin-top: 2em;
+        background-color: #FFF7E8;
+        width: 90%;
+        padding: 1em;
+        border: 1px solid black;
+        border-radius: 1em;
+    }
+    
+    .-userprofile{
+        display: flex;
+        font-size: 1.5em;
+        font-weight: 600;
+        align-items: center;
+        img{
+            width: 3em;
+            height: 3em;
+            border-radius: 54px;
+        }
+    
+        span{
+            margin-left: 6%;
+        }
+    }
+
+    .-text{
+        p{
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+    }
+    .-date{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5%;
+    }
+    .-rating{
+        display: flex;
+        justify-content: space-around;
+        gap: 1em;
+        span{
+            display: flex;
+            align-items: center;
+        }
+    }
+    .BlogComment{
+        width: 90%;
+        margin-top: 1.6em;
+        background-color: #FFF7E8;
+        padding: 1em;
+        border:1px solid black;
+        border-radius: 1em;
+
+        .AddComment{
+            justify-content: space-around;
+            display: flex;
+            img{
+                width: 4em;
+                height: 4em;
+                border-radius: 54px;
+            }
+            .-card{
+                border-radius: 1.6em;
+                background: #E2B363;
+                width: 80%;
+                height: 4em;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                
+                input{
+                    background: #E2B363;
+                    border: none;
+                }
+            }
+            
+        }
+        .CommentZone{
+            margin-top: 4%;
+            display: flex;
+            flex-direction: column;
+            .User{
+                display: flex;
+                align-items: center;
+                gap: 1em;
+                img{
+                    width: 4em;
+                    height: 4em;
+                    border-radius: 54px;
+                }
+            }
+            .Comment{
+                width: 100%;
+                span{
+                    display: flex;
+                    align-items: center;
+                    justify-content: right;
+                    gap: .5em;
+                }
+            }
+        }
+    }
+}
