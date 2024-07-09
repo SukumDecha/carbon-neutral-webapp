@@ -8,7 +8,7 @@ import AuthScreen from "./screens/AuthScreen";
 import AuthLayout from "./shared/components/layouts/AuthLayout";
 import TrackerScreen from "./screens/TrackerScreen";
 import CampaignScreen from "./screens/CampaignScreen";
-import UserProfile from "./features/user/components/UserProfile";
+
 import AdminScreen from "./screens/admin/AdminScreen";
 import ClientProviders from "./shared/components/providers/ClientProviders";
 import Loading from "./shared/components/Loading";
@@ -28,6 +28,8 @@ import EditProductForm from "./features/product/components/admin/EditProductForm
 import ProductDetails from "./features/product/components/ProductDetails";
 import { HistoryScreen } from "./screens/HistoryScreen";
 import { StatisticScreen } from "./screens/StatisticScreen";
+import { EditProfile } from "./features/user/components/EditProfile";
+import { UserProfile } from "./features/user/components/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <UserProfile />,
+      },
+      {
+        path: "/profile/edit",
+        element: <EditProfile />,
       },
       {
         path: "/profile/history",

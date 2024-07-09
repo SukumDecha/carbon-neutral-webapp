@@ -18,7 +18,7 @@ const linkTo = [
   },
   {
     title: "Exchange",
-    path: "/store",
+    path: "/exchange",
     img: <Store size={32} />,
   },
   {

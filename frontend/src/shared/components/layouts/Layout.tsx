@@ -13,8 +13,9 @@ const Layout = () => {
         position: "relative",
       }}
     >
-      {pathname === "/profile" || pathname === "/personal" ? <></> : <></>}
-      {pathname === "/personal" || pathname === "/cart" ? (
+      {pathname === "/profile" || pathname === "/personal" ? (
+        <></>
+      ) : pathname === "/personal" || pathname === "/cart" ? (
         <HeaderSetting />
       ) : (
         <Header />

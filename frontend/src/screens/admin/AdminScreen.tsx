@@ -15,7 +15,7 @@ import CreateCampaignForm from "../../features/campaign/components/admin/CreateC
 export type IFeature = "blogs" | "products" | "campaigns";
 
 const AdminScreen = () => {
-  const [feature, setFeature] = useState<IFeature | undefined>(undefined);
+  const [feature, setFeature] = useState<IFeature>("products");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -132,9 +132,24 @@ const AdminScreen = () => {
       <div className="-header">
         <h2>Select Action</h2>
         <div className="-wrap">
-          <Button onClick={() => setFeature("products")}>Products</Button>
-          <Button onClick={() => setFeature("blogs")}>Create Blog</Button>
-          <Button onClick={() => setFeature("campaigns")}>Campaigns</Button>
+          <Button
+            type={feature === "products" ? "primary" : "default"}
+            onClick={() => setFeature("products")}
+          >
+            Products
+          </Button>
+          <Button
+            type={feature === "blogs" ? "primary" : "default"}
+            onClick={() => setFeature("blogs")}
+          >
+            Create Blog
+          </Button>
+          <Button
+            type={feature === "campaigns" ? "primary" : "default"}
+            onClick={() => setFeature("campaigns")}
+          >
+            Campaigns
+          </Button>
         </div>
       </div>
 

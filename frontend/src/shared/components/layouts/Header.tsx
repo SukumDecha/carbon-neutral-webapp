@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 const Header = () => {
   return (
     <div className="header">
-      <Link to="/cart" className="-icon">
+      <Link to="/profile" className="-icon">
         <CircleUserRound />
       </Link>
       <div className="-point-label">{0} POINT</div>
@@ -28,15 +28,15 @@ export const HeaderSetting = () => {
       setNamepath("Cart");
       setActive(false);
     } else if (pathname === "/history") {
-      setNamepath("Purchaase History");
+      setNamepath("Purchase History");
     }
   }, [pathname]);
 
   return (
     <div className="HeaderSetting">
-      <div>
+      <Link to="/">
         <ChevronLeft />
-      </div>
+      </Link>
       <div>{namepath}</div>
       <div>{active && <Settings />}</div>
     </div>

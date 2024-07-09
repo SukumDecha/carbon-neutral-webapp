@@ -32,7 +32,7 @@ const navigation: INavigation[] = [
   },
   {
     title: "Blog",
-    href: "/blog",
+    href: "/blogs",
     icon: <MessageSquareMore />,
   },
   {
